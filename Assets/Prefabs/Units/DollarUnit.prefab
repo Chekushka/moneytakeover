@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 3619648578108196224}
   - component: {fileID: 1688167454}
   m_Layer: 7
-  m_Name: Unit
+  m_Name: DollarUnit
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f45435b7457e474a9aa6ada25bf068e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  unitSpeed: 5
+  unitRotationSpeed: 10
+  team: 1
+  startBuilding: {fileID: 0}
 --- !u!136 &3619648578108196224
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -239,7 +242,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &1683300516168074800
 GameObject:
@@ -264,8 +267,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683300516168074800}
-  m_LocalRotation: {x: -0.015429334, y: 0.06907663, z: -0.018189762, w: 0.9973262}
-  m_LocalPosition: {x: -0.0047284807, y: 0.6577564, z: -0.03101982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6577564, z: -0.03101982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4313639836193318457}
@@ -887,7 +890,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8298632682067766198}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

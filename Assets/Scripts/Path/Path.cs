@@ -8,8 +8,8 @@ namespace Path
     public class Path : MonoBehaviour
     {
         [SerializeField] private float textureScrollSpeed = 1f;
-    
-        private Team _team;
+        [SerializeField] private Team team;
+        
         private LineRenderer _line;
         private LineCollider _lineCollider;
         private Building _startBuilding;
@@ -26,7 +26,7 @@ namespace Path
         {
             _startBuilding = start;
             _endBuilding = end;
-            _team = team;
+            this.team = team;
             _line = GetComponent<LineRenderer>();
             _lineCollider = GetComponent<LineCollider>();
         
@@ -38,14 +38,24 @@ namespace Path
             _isPathCreated = true;
         }
 
-        public bool ComparePathPoints(Building start, Building end)
+        public bool IfPathsEqual(Building start, Building end)
         {
             var isEqual = (start.GetInstanceID() == _startBuilding.GetInstanceID() && 
-                           end.GetInstanceID() == _endBuilding.GetInstanceID()) ||
-                          (start.GetInstanceID() == _endBuilding.GetInstanceID()
-                           && end.GetInstanceID() == _startBuilding.GetInstanceID());
+                           end.GetInstanceID() == _endBuilding.GetInstanceID());
             return isEqual;
         }
+        
+        public bool IfPathsReverse(Building start, Building end)
+        {
+            var isEqual = (start.GetInstanceID() == _endBuilding.GetInstanceID() && 
+                           end.GetInstanceID() == _startBuilding.GetInstanceID());
+            return isEqual;
+        }
+
+        public Team GetPathTeam() => team;
+        public Vector3 GetPathStartPos() => _startBuilding.GetLinePos();
+        public Vector3 GetPathEndPos() => _endBuilding.GetLinePos();
+        public Building GetStartBuilding() => _startBuilding;
 
         private void FormPathLine()
         {

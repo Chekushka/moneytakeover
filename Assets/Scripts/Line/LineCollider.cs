@@ -19,5 +19,6 @@ namespace Line
             _collider.transform.LookAt(startPos);
             _collider.height = Vector3.Distance(startPos, endPos);
         }
+        
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6860296487160228443}
   - component: {fileID: 3953359233898125632}
   - component: {fileID: 5491635990609833997}
+  - component: {fileID: 4891531877843383785}
   m_Layer: 10
   m_Name: Path
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureScrollSpeed: 1
+  team: 0
 --- !u!114 &3953359233898125632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +158,20 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &4891531877843383785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860296487160228440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b6e655fee81ed64e910100f84e70d38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToStartSpawn: 0.8
+  delayBetweenSpawn: 1
 --- !u!1 &7625228729625527518
 GameObject:
   m_ObjectHideFlags: 0

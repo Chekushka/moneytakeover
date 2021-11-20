@@ -40,9 +40,14 @@ public class InputControlsProviding : MonoBehaviour
             _startBuilding = hit.transform.GetComponent<Building>();
             if (_startBuilding.GetTeam() == playerTeam)
             {
-                lineDrawer.StartPos = _startBuilding.GetLinePos();
-                lineDrawer.SetLinePos();
+                if (_startBuilding.GetTeam() == playerTeam)
+                {
+                    lineDrawer.StartPos = _startBuilding.GetLinePos();
+                    lineDrawer.SetLinePos();
+                }
             }
+            else
+                _startBuilding = null;
         }
         
         if (lineDrawer.StartPos != Vector3.zero && _endBuilding == null)
@@ -53,10 +58,9 @@ public class InputControlsProviding : MonoBehaviour
         
         if (touch.phase == TouchPhase.Moved)
         {
-            if (hit.collider.gameObject.layer == BuildingLayer && !_isRemoverActive)
+            if (hit.collider.gameObject.layer == BuildingLayer && !_isRemoverActive && _startBuilding != null)
             {
-                if (hit.transform.gameObject.GetInstanceID() != _startBuilding.gameObject.GetInstanceID() 
-                    && _startBuilding != null)
+                if (hit.transform.gameObject.GetInstanceID() != _startBuilding.gameObject.GetInstanceID())
                 {
                     _endBuilding = hit.transform.GetComponent<Building>();
                     lineDrawer.EndPos = _endBuilding.GetLinePos();
@@ -78,7 +82,8 @@ public class InputControlsProviding : MonoBehaviour
         if (touch.phase == TouchPhase.Ended)
         {
             lineDrawer.RemoveLine();
-            if (_startBuilding != null && _endBuilding != null && !lineDrawer.isError)
+            if (_startBuilding != null && _endBuilding != null && !lineDrawer.isError &&
+                _startBuilding.IsPathCreationAvailable())
                 pathCreating.CreatePath(_startBuilding, _endBuilding, _startBuilding.GetTeam());
             _startBuilding = null;
             _endBuilding = null;
