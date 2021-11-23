@@ -19,7 +19,7 @@ namespace Path
         private void Update()
         {
             if(_isPathCreated)
-                _line.materials[0].mainTextureOffset = new Vector2(-textureScrollSpeed * Time.time, 0);
+                _line.materials[1].mainTextureOffset = new Vector2(-textureScrollSpeed * Time.time, 0);
         }
 
         public void SetPath(Building start, Building end, Team team)
@@ -33,8 +33,7 @@ namespace Path
             FormPathLine();
             _lineCollider.CreateLineCollider(start.transform.position,
                 end.transform.position, _line.startWidth, false);
-            _line.materials[1] = TeamColors.GetInstance().GetLineMaterial(team);
-        
+            _line.material = TeamColors.GetInstance().GetLineMaterial(team);
             _isPathCreated = true;
         }
 

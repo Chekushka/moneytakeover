@@ -15,7 +15,7 @@ namespace Buildings
         public void SetColorForCircles(int circleIndex, Team team)
         {
             for(var i = 0; i < circleIndex; i++)
-                circles[circleIndex].color =
+                circles[i].color =
                     TeamColors.GetInstance().GetBuildingPathsCountIndicatorColor(team);
         }
 

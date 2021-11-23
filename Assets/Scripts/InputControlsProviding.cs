@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Buildings;
 using Line;
 using Path;
@@ -87,7 +84,7 @@ public class InputControlsProviding : MonoBehaviour
         {
             lineDrawing.RemoveLine();
             if (_startBuilding != null && _endBuilding != null && !lineDrawing.isError &&
-                _startBuilding.IsPathCreationAvailable())
+                _startBuilding.GetComponent<BuildingPathIndicating>().IsPathCreationAvailable())
                 pathCreating.CreatePath(_startBuilding, _endBuilding, _startBuilding.GetTeam());
             _startBuilding = null;
             _endBuilding = null;

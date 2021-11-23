@@ -8,9 +8,6 @@ namespace Buildings
     {
         [SerializeField] private Team team;
         [SerializeField] private BuildingType type;
-        [SerializeField] private int availablePathsCount = 1;
-        [SerializeField] private int pathsCount;
-        [SerializeField] private List<BuildingPathIndicatorsGroup> pathIndicators;
 
         private BuildingTeamSetting _buildingTeam;
         private Vector3 _linePos;
@@ -25,48 +22,6 @@ namespace Buildings
 
         public Team GetTeam() => team;
         public Vector3 GetLinePos() => _linePos;
-        
-        public int GetAvailablePathsCount() => availablePathsCount;
-
-        public void IncreaseAvailablePathsCount()
-        {
-            if (availablePathsCount > 3) return;
-            
-            pathIndicators[availablePathsCount - 1].ClearAllCircles();
-            pathIndicators[availablePathsCount - 1].gameObject.SetActive(false);
-            
-            availablePathsCount++;
-            pathIndicators[availablePathsCount - 1].gameObject.SetActive(true);
-            pathIndicators[availablePathsCount - 1].SetColorForCircles(pathsCount, team);
-        }
-        public void DecreaseAvailablePathsCount()
-        {
-            if (availablePathsCount <= 1) return;
-            
-            pathIndicators[availablePathsCount - 1].ClearAllCircles();
-            pathIndicators[availablePathsCount - 1].gameObject.SetActive(false);
-            
-            availablePathsCount--;
-            pathIndicators[availablePathsCount - 1].gameObject.SetActive(true);
-            pathIndicators[availablePathsCount - 1].SetColorForCircles(pathsCount, team);
-        }
-
-        public void IncreasePathsCount()
-        {
-            if (pathsCount > availablePathsCount) return;
-            
-            pathsCount++;
-            pathIndicators[availablePathsCount - 1].SetCircleColor(pathsCount - 1, team);
-        }
-
-
-        public void DecreasePathsCount()
-        {
-            if (pathsCount < 0) return;
-            
-            pathIndicators[availablePathsCount - 1].ClearCircleColor(pathsCount - 1);
-            pathsCount--;
-        }
 
         public void ChangeBuildingTeam(Team teamToChange)
         {
@@ -74,8 +29,6 @@ namespace Buildings
             _buildingTeam.ChangeTeamTo(teamToChange);
             //Particles
         }
-
-        public bool IsPathCreationAvailable() => pathsCount < availablePathsCount;
     }
 
     public enum BuildingType

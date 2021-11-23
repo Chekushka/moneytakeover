@@ -35,7 +35,7 @@ namespace Path
 
         public void RemovePath(Path path)
         {
-            path.GetStartBuilding().DecreasePathsCount();
+            path.GetStartBuilding().GetComponent<BuildingPathIndicating>().DecreasePathsCount();
             var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(pathToRemove);
         }
@@ -47,7 +47,7 @@ namespace Path
             createdPaths.Add(newPath);
             newPath.gameObject.name = team + " path";
             
-            start.IncreasePathsCount();
+            start.GetComponent<BuildingPathIndicating>().IncreasePathsCount();
         }
 
         private bool IfPathExist(Building start, Building end)
