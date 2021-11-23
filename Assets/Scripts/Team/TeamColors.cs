@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TeamColors : MonoBehaviour
 {
-    [SerializeField] private List<Material> buildingMaterials;
+    [SerializeField] private List<Material> mainBuildingMaterials;
+    [SerializeField] private List<Material> buildingNameMaterials;
     [SerializeField] private List<Color> buildingPathsCountIndicatorColors;
     [SerializeField] private List<Material> lineMaterials;
     [SerializeField] private List<Unit> unitsPrefabs;
@@ -20,7 +21,8 @@ public class TeamColors : MonoBehaviour
     }
     
     public static TeamColors GetInstance() => _instance; 
-    public Material GetBuildingMaterial(Team team) => buildingMaterials[(int)team];
+    public Material GetBuildingMainMaterial(Team team) => mainBuildingMaterials[(int)team];
+    public Material GetBuildingNameMaterial(Team team) => buildingNameMaterials[(int)team];
     public Material GetLineMaterial(Team team) => lineMaterials[(int)team];
     public Unit GetUnitPrefab(Team team) => unitsPrefabs[(int)team];
     public Color GetBuildingPathsCountIndicatorColor(Team team) => buildingPathsCountIndicatorColors[(int)team];

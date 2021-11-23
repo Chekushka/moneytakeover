@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,17 +7,18 @@ namespace Buildings
     public class BuildingUnitCount : MonoBehaviour
     {
         [SerializeField] private int unitCount = 10;
+        [SerializeField] private int maxUnitCount = 65;
         [SerializeField] private TextMeshPro countText;
 
         private Building _building;
-        private const string UnitTag = "Unit";
+        private const int UnitLayer = 7;
         
         private void Start() => _building = GetComponent<Building>();
         private void Update() => countText.text = unitCount.ToString();
 
         private void OnTriggerEnter(Collider other)
         {
-            if(!other.gameObject.CompareTag(UnitTag)) return;
+            if(other.gameObject.layer != UnitLayer) return;
             var unit = other.gameObject.GetComponent<Unit>();
 
             if(unit.startBuilding.GetInstanceID() == _building.GetInstanceID()) return;
@@ -28,7 +28,7 @@ namespace Buildings
 
             if (unit.GetTeam() == _building.GetTeam())
             {
-                if (unitCount < 100)
+                if (unitCount < maxUnitCount)
                 {
                     unitCount++;
                     if ((unitCount == 21 || unitCount == 31))

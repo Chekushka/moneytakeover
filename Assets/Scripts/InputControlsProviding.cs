@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class InputControlsProviding : MonoBehaviour
 {
-    [SerializeField] private LineDrawer lineDrawer;
+    [SerializeField] private LineDrawing lineDrawing;
     [SerializeField] private GameObject lineRemover;
     [SerializeField] private LayerMask inputLayerMask;
     [SerializeField] private Team playerTeam;
@@ -22,7 +22,7 @@ public class InputControlsProviding : MonoBehaviour
 
     private void Start()
     {
-        lineDrawer.SetLineTeamMaterial(TeamColors.GetInstance().GetLineMaterial(playerTeam));
+        lineDrawing.SetLineTeamMaterial(TeamColors.GetInstance().GetLineMaterial(playerTeam));
     }
 
     private void Update()
@@ -42,18 +42,19 @@ public class InputControlsProviding : MonoBehaviour
             {
                 if (_startBuilding.GetTeam() == playerTeam)
                 {
-                    lineDrawer.StartPos = _startBuilding.GetLinePos();
-                    lineDrawer.SetLinePos();
+                    lineDrawing.StartPos = _startBuilding.GetLinePos();
+                    lineDrawing.SetLinePos();
+                    lineDrawing.SetStartBuilding(_startBuilding);
                 }
             }
             else
                 _startBuilding = null;
         }
         
-        if (lineDrawer.StartPos != Vector3.zero && _endBuilding == null)
+        if (lineDrawing.StartPos != Vector3.zero && _endBuilding == null)
         {
-            lineDrawer.EndPos = new Vector3(hit.point.x, 0.1f, hit.point.z);
-            lineDrawer.SetLinePos();
+            lineDrawing.EndPos = new Vector3(hit.point.x, 0.1f, hit.point.z);
+            lineDrawing.SetLinePos();
         }
         
         if (touch.phase == TouchPhase.Moved)
@@ -63,7 +64,8 @@ public class InputControlsProviding : MonoBehaviour
                 if (hit.transform.gameObject.GetInstanceID() != _startBuilding.gameObject.GetInstanceID())
                 {
                     _endBuilding = hit.transform.GetComponent<Building>();
-                    lineDrawer.EndPos = _endBuilding.GetLinePos();
+                    lineDrawing.EndPos = _endBuilding.GetLinePos();
+                    lineDrawing.SetLinePos();
                 }
             }
 
@@ -77,12 +79,14 @@ public class InputControlsProviding : MonoBehaviour
 
         if (hit.collider.gameObject.layer != BuildingLayer &&
             touch.phase == TouchPhase.Moved && _startBuilding != null)
+        {
             _endBuilding = null;
+        }
 
         if (touch.phase == TouchPhase.Ended)
         {
-            lineDrawer.RemoveLine();
-            if (_startBuilding != null && _endBuilding != null && !lineDrawer.isError &&
+            lineDrawing.RemoveLine();
+            if (_startBuilding != null && _endBuilding != null && !lineDrawing.isError &&
                 _startBuilding.IsPathCreationAvailable())
                 pathCreating.CreatePath(_startBuilding, _endBuilding, _startBuilding.GetTeam());
             _startBuilding = null;

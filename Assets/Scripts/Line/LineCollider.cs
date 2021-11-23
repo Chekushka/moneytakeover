@@ -13,10 +13,10 @@ namespace Line
             _collider.enabled = true;
             _collider.radius = width / 2;
             _collider.direction = 2;
-            _collider.center = isInputLine ? Vector3.zero : new Vector3(0, -1.5f, 0);
+            _collider.center = Vector3.zero;
 
             _collider.transform.position = startPos + (endPos - startPos) / 2;
-            _collider.transform.LookAt(startPos);
+            _collider.transform.LookAt(endPos);
             _collider.height = Vector3.Distance(startPos, endPos);
         }
         

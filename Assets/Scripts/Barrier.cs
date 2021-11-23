@@ -4,19 +4,19 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     private const int LineLayer = 8;
-    private LineDrawer _lineDrawer;
+    private LineDrawing _lineDrawing;
 
-    private void Start() => _lineDrawer = FindObjectOfType<LineDrawer>();
+    private void Start() => _lineDrawing = FindObjectOfType<LineDrawing>();
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.layer != LineLayer) return;
-        _lineDrawer.SetLineError(true);
+        _lineDrawing.SetLineError(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.layer != LineLayer) return;
-        _lineDrawer.SetLineError(false);
+        _lineDrawing.SetLineError(false);
     }
 }

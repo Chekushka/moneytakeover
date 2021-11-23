@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Unit
   - Building
+  - UnitDollar
+  - UnitEuro
+  - UnitYuan
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ namespace Buildings
     public class Building : MonoBehaviour
     {
         [SerializeField] private Team team;
+        [SerializeField] private BuildingType type;
         [SerializeField] private int availablePathsCount = 1;
         [SerializeField] private int pathsCount;
         [SerializeField] private List<BuildingPathIndicatorsGroup> pathIndicators;
@@ -75,5 +76,12 @@ namespace Buildings
         }
 
         public bool IsPathCreationAvailable() => pathsCount < availablePathsCount;
+    }
+
+    public enum BuildingType
+    {
+        Bank,
+        MonetaryYard,
+        Exchange
     }
 }

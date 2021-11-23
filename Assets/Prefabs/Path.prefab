@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToStartSpawn: 0.8
-  delayBetweenSpawn: 1
+  delayBetweenSpawn: 1.2
 --- !u!1 &7625228729625527518
 GameObject:
   m_ObjectHideFlags: 0
