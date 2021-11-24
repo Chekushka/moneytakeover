@@ -8,9 +8,9 @@ public class InputControlsProviding : MonoBehaviour
     [SerializeField] private LineDrawing lineDrawing;
     [SerializeField] private GameObject lineRemover;
     [SerializeField] private LayerMask inputLayerMask;
-    [SerializeField] private Team playerTeam;
     [SerializeField] private PathCreating pathCreating;
 
+    private Team _playerTeam;
     private Building _startBuilding;
     private Building _endBuilding;
     private bool _isRemoverActive;
@@ -19,7 +19,8 @@ public class InputControlsProviding : MonoBehaviour
 
     private void Start()
     {
-        lineDrawing.SetLineTeamMaterial(TeamColors.GetInstance().GetLineMaterial(playerTeam));
+        _playerTeam = TeamAssignment.GetInstance().GetPlayerTeam();
+        lineDrawing.SetLineTeamMaterial(TeamColors.GetInstance().GetLineMaterial(_playerTeam));
     }
 
     private void Update()
@@ -35,9 +36,9 @@ public class InputControlsProviding : MonoBehaviour
         if (touch.phase == TouchPhase.Began && hit.collider.gameObject.layer == BuildingLayer)
         {
             _startBuilding = hit.transform.GetComponent<Building>();
-            if (_startBuilding.GetTeam() == playerTeam)
+            if (_startBuilding.GetTeam() == _playerTeam)
             {
-                if (_startBuilding.GetTeam() == playerTeam)
+                if (_startBuilding.GetTeam() == _playerTeam)
                 {
                     lineDrawing.StartPos = _startBuilding.GetLinePos();
                     lineDrawing.SetLinePos();

@@ -13,7 +13,7 @@ namespace Path
     
         public void CreatePath(Building start, Building end, Team team)
         {
-            if (IfPathExist(start, end)) return;
+            if (GetPathByPoints(start, end) != null) return;
 
             if (GetReversePath(start, end) != null)
             {
@@ -35,7 +35,7 @@ namespace Path
 
         public void RemovePath(Path path)
         {
-            path.GetStartBuilding().GetComponent<BuildingPathIndicating>().DecreasePathsCount();
+            path.GetStartBuilding().RemovePath(path);
             var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(pathToRemove);
         }
@@ -48,16 +48,11 @@ namespace Path
             newPath.gameObject.name = team + " path";
             
             start.GetComponent<BuildingPathIndicating>().IncreasePathsCount();
+            start.AttachPath(newPath);
         }
 
-        private bool IfPathExist(Building start, Building end)
-        {
-            var isExist = false;
-            foreach (var path in createdPaths.Where(path => path.IfPathsEqual(start, end)))
-                isExist = true;
-
-            return isExist;
-        }
+        public Path GetPathByPoints(Building start, Building end) =>
+            createdPaths.Find(path => path.IfPathsEqual(start, end));
 
         private Path GetReversePath(Building start, Building end) =>
             createdPaths.Find(path => path.IfPathsReverse(start, end));
