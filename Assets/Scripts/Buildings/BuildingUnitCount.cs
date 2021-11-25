@@ -23,8 +23,15 @@ namespace Buildings
             _pathIndicating = GetComponent<BuildingPathIndicating>();
             _buildingGrowing = GetComponent<BuildingGrowing>();
         }
-        private void Update() => countText.text = unitCount.ToString();
 
+        private void Update()
+        {
+            if(unitCount < maxUnitCount)
+                countText.text = unitCount.ToString();
+            if (unitCount == maxUnitCount)
+                countText.text = "MAX";
+        }
+        
         private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.layer != UnitLayer) return;
@@ -39,20 +46,39 @@ namespace Buildings
             {
                 if (unitCount < maxUnitCount)
                 {
-                    unitCount++;
-                    if (unitCount == 21 || unitCount == 31)
-                        _pathIndicating.IncreaseAvailablePathsCount();
+                    if (unit.GetUnitType() == BuildingType.MonetaryYard)
+                    {
+                        if (unitCount == 18 || unitCount == 28)
+                            _pathIndicating.IncreaseAvailablePathsCount();
+                        unitCount += 2;
+                    }
+                    else
+                    {
+                        if (unitCount == 19 || unitCount == 29)
+                            _pathIndicating.IncreaseAvailablePathsCount();
+                        unitCount++;
+                    }
                     
-                    if(unitCount % 10 == 1 && unitCount > 20)
+                    if(unitCount % 10 == 0 && unitCount >= 20)
                         _buildingGrowing.AddBuildingLevel();
                 }
             }
             else
             {
-                unitCount--;
-                if (unitCount == 19 || unitCount == 29) 
-                    _pathIndicating.DecreaseAvailablePathsCount();
-                if(unitCount % 10 == 9 && unitCount > 10)
+                if (unit.GetUnitType() == BuildingType.Exchange)
+                {
+                    if (unitCount == 21 || unitCount == 31) 
+                        _pathIndicating.DecreaseAvailablePathsCount();
+                    unitCount -= 2;
+                }
+                else
+                {
+                    if (unitCount == 20 || unitCount == 30) 
+                        _pathIndicating.DecreaseAvailablePathsCount();
+                    unitCount--;
+                }
+
+                if(unitCount % 10 == 0 && unitCount >= 20)
                     _buildingGrowing.RemoveBuildingLevel();
             }
             

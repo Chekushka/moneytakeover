@@ -43,10 +43,10 @@ namespace Path
 
         public void RemovePath(Path path)
         {
-            path.GetEndBuilding().UpdateUnitSpawnPower();
             path.GetStartBuilding().RemovePath(path);
             var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(pathToRemove);
+            path.GetEndBuilding().UpdateUnitSpawnPower();
         }
 
         public void CreateLineAfterBattle(Path removedPath)

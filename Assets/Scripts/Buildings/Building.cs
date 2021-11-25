@@ -14,6 +14,8 @@ namespace Buildings
         [SerializeField] private BuildingType type;
         [SerializeField] private List<Path.Path> attachedPaths;
         [SerializeField] private List<Building> availableBuildingsToPath;
+        [SerializeField] private GameObject buildingChangeParticles;
+        [SerializeField] private Transform particleSpawnPoint;
         
         public int unitSpawnPower;
 
@@ -33,6 +35,7 @@ namespace Buildings
         }
 
         public Team GetTeam() => team;
+        public BuildingType GetBuildingType() => type;
         public Vector3 GetLinePos() => _linePos;
         public List<Building> GetAvailableBuildingsToPath() => availableBuildingsToPath;
         public List<Path.Path> GetAttachedPaths() => attachedPaths;
@@ -91,7 +94,9 @@ namespace Buildings
             }
             _indicating.ResetPathCountIndicating();
             UpdateUnitSpawnPower();
-            //Particles
+
+
+            Instantiate(buildingChangeParticles, particleSpawnPoint.position, Quaternion.identity);
         }
 
         public void UpdateUnitSpawnPower()

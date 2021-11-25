@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour
    [SerializeField] private float unitSpeed = 3f;
    [SerializeField] private float unitRotationSpeed = 10f;
    [SerializeField] private Team team;
+   [SerializeField] private BuildingType type;
    [SerializeField] private float unitDestroyDelay = 2f;
    [SerializeField] private GameObject deathParticles;
 
@@ -19,12 +20,14 @@ public class Unit : MonoBehaviour
    private static readonly int IsDead = Animator.StringToHash("IsDead");
 
    public Team GetTeam() => team;
+   public BuildingType GetUnitType() => type;
    public void SetTargetPos(Vector3 position) => _targetPos = position;
 
    private void Start()
    {
       _collider = GetComponent<Collider>();
       _unitAnimator = GetComponent<Animator>();
+      type = startBuilding.GetBuildingType();
    }
 
    private void Update()

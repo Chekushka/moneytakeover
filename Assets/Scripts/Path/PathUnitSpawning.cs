@@ -1,3 +1,4 @@
+using Buildings;
 using UnityEngine;
 
 namespace Path
@@ -23,9 +24,24 @@ namespace Path
         {
             var unitStartPos = _unitPath.GetPathStartPos();
             var unitStartRotation = Quaternion.LookRotation(_unitPath.GetPathEndPos());
+            Unit unitPrefab = null;
+            var buildingType = _unitPath.GetStartBuilding().GetBuildingType();
             
-            var newUnit = Instantiate(TeamColors.GetInstance().GetUnitPrefab(_unitPath.GetPathTeam()), 
-                unitStartPos, unitStartRotation, _unitParent);
+            switch (buildingType)
+            {
+                case BuildingType.Bank:
+                    unitPrefab = TeamColors.GetInstance().GetUnitPrefab(_unitPath.GetPathTeam());
+                    break;
+                case BuildingType.MonetaryYard:
+                    unitPrefab = TeamColors.GetInstance().GetMonYardUnitPrefab(_unitPath.GetPathTeam());
+                    break;
+                case BuildingType.Exchange:
+                    // unitPrefab =
+                    break;
+            }
+
+
+            var newUnit = Instantiate(unitPrefab, unitStartPos, unitStartRotation, _unitParent);
             newUnit.SetTargetPos(_unitPath.GetPathEndPos());
             newUnit.startBuilding = _unitPath.GetStartBuilding();
         }

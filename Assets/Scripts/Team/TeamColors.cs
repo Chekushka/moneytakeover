@@ -9,6 +9,7 @@ public class TeamColors : MonoBehaviour
     [SerializeField] private List<Color> buildingPathsCountIndicatorColors;
     [SerializeField] private List<Material> lineMaterials;
     [SerializeField] private List<Unit> unitsPrefabs;
+    [SerializeField] private List<Unit> unitsMonYardPrefabs;
 
     private static TeamColors _instance;
 
@@ -25,5 +26,6 @@ public class TeamColors : MonoBehaviour
     public Material GetBuildingNameMaterial(Team team) => buildingNameMaterials[(int)team];
     public Material GetLineMaterial(Team team) => lineMaterials[(int)team];
     public Unit GetUnitPrefab(Team team) => unitsPrefabs[(int)team];
+    public Unit GetMonYardUnitPrefab(Team team) => unitsMonYardPrefabs[(int)team];
     public Color GetBuildingPathsCountIndicatorColor(Team team) => buildingPathsCountIndicatorColors[(int)team];
 }
