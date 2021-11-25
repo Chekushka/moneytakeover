@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnemyAI;
+using Path;
 using UnityEngine;
 
 namespace Buildings
@@ -11,9 +14,12 @@ namespace Buildings
         [SerializeField] private BuildingType type;
         [SerializeField] private List<Path.Path> attachedPaths;
         [SerializeField] private List<Building> availableBuildingsToPath;
+        
+        public int unitSpawnPower;
 
         private BuildingTeamSetting _buildingTeam;
         private BuildingPathIndicating _indicating;
+        private PathCreating _pathCreating;
         private Vector3 _linePos;
         private const float LineYPos = 0.1f;
 
@@ -21,6 +27,7 @@ namespace Buildings
         {
             _buildingTeam = GetComponent<BuildingTeamSetting>();
             _indicating = GetComponent<BuildingPathIndicating>();
+            _pathCreating = FindObjectOfType<PathCreating>();
             _linePos = transform.position;
             _linePos.y = LineYPos;
         }
@@ -47,23 +54,51 @@ namespace Buildings
 
             if (teamToChange != TeamAssignment.GetInstance().GetPlayerTeam())
             {
-                var enemy = TeamAssignment.GetInstance().GetEnemyByTeam(teamToChange);
-                enemy.RemoveBuildingFromOwn(this);
-                
-                team = teamToChange;
-                _buildingTeam.ChangeTeamTo(teamToChange);
-                
-                enemy = TeamAssignment.GetInstance().GetEnemyByTeam(teamToChange);
-                enemy.AddBuildingToOwn(this);
+                if (team != TeamAssignment.GetInstance().GetPlayerTeam())
+                {
+                    EnemyDecisions currentPlayer;
+                    if (team != Team.Neutral)
+                    {
+                        currentPlayer = TeamAssignment.GetInstance().GetEnemyByTeam(team);
+                        currentPlayer.RemoveBuildingFromOwn(this); 
+                    }
+
+                    team = teamToChange;
+                    _buildingTeam.ChangeTeamTo(teamToChange);
+
+                    currentPlayer = TeamAssignment.GetInstance().GetEnemyByTeam(team);
+                    currentPlayer.AddBuildingToOwn(this);
+                }
+                else
+                {
+                    team = teamToChange;
+                    _buildingTeam.ChangeTeamTo(teamToChange);
+
+                    var currentPlayer = TeamAssignment.GetInstance().GetEnemyByTeam(team);
+                    currentPlayer.AddBuildingToOwn(this);
+                }
             }
             else
             {
-                team = teamToChange;
-                _buildingTeam.ChangeTeamTo(teamToChange);
-            }
-            
+                if (team != Team.Neutral)
+                {
+                    var currentPlayer = TeamAssignment.GetInstance().GetEnemyByTeam(team);
+                    currentPlayer.RemoveBuildingFromOwn(this); 
+                }
 
+                team = teamToChange;
+                _buildingTeam.ChangeTeamTo(team);
+            }
+            _indicating.ResetPathCountIndicating();
+            UpdateUnitSpawnPower();
             //Particles
+        }
+
+        public void UpdateUnitSpawnPower()
+        {
+            var pathsEndThis = _pathCreating.GetPathsList().Where(x => x.GetEndBuilding().
+                gameObject.GetInstanceID() == gameObject.GetInstanceID() && x.GetPathTeam() == team).ToList();
+            unitSpawnPower = pathsEndThis.Count;
         }
     }
 

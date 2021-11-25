@@ -8,7 +8,7 @@ namespace Line
 
         private void Awake() => _collider = GetComponentInChildren<CapsuleCollider>();
 
-        public void CreateLineCollider(Vector3 startPos, Vector3 endPos, float width, bool isInputLine)
+        public void CreateLineCollider(Vector3 startPos, Vector3 endPos, float width)
         {
             _collider.enabled = true;
             _collider.radius = width / 2;

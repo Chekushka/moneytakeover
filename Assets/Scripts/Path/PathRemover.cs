@@ -13,8 +13,12 @@ namespace Path
         private void OnCollisionEnter(Collision other)
         {
             if(other.gameObject.layer != PathLayer) return;
-            _pathCreating.RemovePath(other.transform.parent.GetComponent<Path>());
-            Destroy(other.transform.parent.gameObject);
+            var path = other.transform.parent.GetComponent<Path>();
+            
+            if(path.IsPathInBattle())
+                _pathCreating.CreateLineAfterBattle(path);
+            else
+                _pathCreating.RemovePath(path);
         }
     }
 }

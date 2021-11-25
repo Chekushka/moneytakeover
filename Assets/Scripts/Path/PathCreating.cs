@@ -22,40 +22,66 @@ namespace Path
                     var reverse = GetReversePath(start, end);
                     RemovePath(reverse);
                     Destroy(reverse.gameObject);
-                    FormPath(start, end, team);
+                    FormPath(start, end, team, false);
                 }
                 else
                 {
-                    //Logic for conquest path;
+                    var enemyPath = GetReversePath(start, end);
+                    
+                    RemovePath(enemyPath);
+                    Destroy(enemyPath.gameObject);
+                    
+                    FormPath(start, end, team, true);
+                    FormPath(end, start, enemyPath.GetPathTeam(), true);
                 }
             }
             else
-                FormPath(start, end, team);
+                FormPath(start, end, team, false);
+            
+            end.UpdateUnitSpawnPower();
         }
 
         public void RemovePath(Path path)
         {
+            path.GetEndBuilding().UpdateUnitSpawnPower();
             path.GetStartBuilding().RemovePath(path);
             var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(pathToRemove);
         }
 
-        private void FormPath(Building start, Building end, Team team)
+        public void CreateLineAfterBattle(Path removedPath)
         {
-            var newPath = Instantiate(pathPrefab, start.transform.position, Quaternion.identity, pathsParent);
-            newPath.SetPath(start, end, team);
-            createdPaths.Add(newPath);
-            newPath.gameObject.name = team + " path";
+            var enemyPath = GetReversePath(removedPath.GetStartBuilding(), removedPath.GetEndBuilding());
+
+            RemovePath(removedPath);
+            RemovePath(enemyPath);
             
-            start.GetComponent<BuildingPathIndicating>().IncreasePathsCount();
-            start.AttachPath(newPath);
+            CreatePath(enemyPath.GetStartBuilding(), enemyPath.GetEndBuilding(), enemyPath.GetPathTeam());
         }
+
+        public List<Path> GetPathsList() => createdPaths;
 
         public Path GetPathByPoints(Building start, Building end) =>
             createdPaths.Find(path => path.IfPathsEqual(start, end));
 
         private Path GetReversePath(Building start, Building end) =>
             createdPaths.Find(path => path.IfPathsReverse(start, end));
-       
+
+        private void FormPath(Building start, Building end, Team team, bool isBattlePath)
+        {
+            var newPath = Instantiate(pathPrefab, start.transform.position, Quaternion.identity, pathsParent);
+            newPath.SetPath(start, end, team, isBattlePath);
+            createdPaths.Add(newPath);
+
+            if(isBattlePath)
+                newPath.gameObject.name = team +" vs " + end.GetTeam() + " battle path";
+            else
+                newPath.gameObject.name = team + " path";
+            
+            start.GetComponent<BuildingPathIndicating>().IncreasePathsCount();
+            start.AttachPath(newPath);
+            
+            
+        }
     }
 }

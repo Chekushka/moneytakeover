@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 625151614117527001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.60100293, y: 0, z: -0.4889369}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 8974232253887256576}
   - {fileID: 5744198888886274039}
@@ -115,6 +115,8 @@ MonoBehaviour:
   unitSpeed: 6
   unitRotationSpeed: 10
   team: 0
+  unitDestroyDelay: 2
+  deathParticles: {fileID: 2264923910264730370, guid: ee5ccbe1df2660643aa0259072f930a5, type: 3}
   startBuilding: {fileID: 0}
 --- !u!136 &3950539823718892922
 CapsuleCollider:

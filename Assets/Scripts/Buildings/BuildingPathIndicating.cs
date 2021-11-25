@@ -10,12 +10,30 @@ namespace Buildings
         [SerializeField] private int availablePathsCount = 1;
         [SerializeField] private int pathsCount;
         [SerializeField] private List<BuildingPathIndicatorsGroup> pathIndicators;
+        [SerializeField] private SpriteRenderer indicatorsBackground;
 
         private Building _building;
-        private void Start() => _building = GetComponent<Building>();
+
+        private void Start()
+        {
+            _building = GetComponent<Building>();
+            indicatorsBackground.color = 
+                TeamColors.GetInstance().GetBuildingPathsCountIndicatorColor(_building.GetTeam());
+        }
 
         public int GetAvailablePathsCount() => availablePathsCount;
         public bool IsPathCreationAvailable() => pathsCount < availablePathsCount;
+
+        public void ResetPathCountIndicating()
+        {
+            foreach (var indicator in pathIndicators)
+                indicator.ClearAllCircles();
+            availablePathsCount = 1;
+            pathsCount = 0;
+
+            indicatorsBackground.color = 
+                TeamColors.GetInstance().GetBuildingPathsCountIndicatorColor(_building.GetTeam());
+        }
 
         public void IncreaseAvailablePathsCount()
         {
@@ -28,6 +46,7 @@ namespace Buildings
             pathIndicators[availablePathsCount - 1].gameObject.SetActive(true);
             pathIndicators[availablePathsCount - 1].SetColorForCircles(pathsCount, _building.GetTeam());
         }
+        
         public void DecreaseAvailablePathsCount()
         {
             if (availablePathsCount <= 1) return;
