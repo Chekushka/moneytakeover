@@ -7,7 +7,8 @@ using UnityEngine;
 
 namespace Buildings
 {
-    [RequireComponent(typeof(BuildingTeamSetting))]
+    [RequireComponent(typeof(BuildingTeamSetting), typeof(BuildingPathIndicating), 
+        typeof(BuildingAvailablePathsFinding))]
     public class Building : MonoBehaviour
     {
         [SerializeField] private Team team;
@@ -23,12 +24,14 @@ namespace Buildings
         private BuildingPathIndicating _indicating;
         private PathCreating _pathCreating;
         private Vector3 _linePos;
+        private Collider _collider;
         private const float LineYPos = 0.1f;
 
-        private void Start()
+        private void Awake()
         {
             _buildingTeam = GetComponent<BuildingTeamSetting>();
             _indicating = GetComponent<BuildingPathIndicating>();
+            _collider = GetComponent<Collider>();
             _pathCreating = FindObjectOfType<PathCreating>();
             _linePos = transform.position;
             _linePos.y = LineYPos;
@@ -38,6 +41,8 @@ namespace Buildings
         public BuildingType GetBuildingType() => type;
         public Vector3 GetLinePos() => _linePos;
         public List<Building> GetAvailableBuildingsToPath() => availableBuildingsToPath;
+        public void SetAvailableBuildingToPath(List<Building> buildings) => availableBuildingsToPath = buildings;
+        public Collider GetBuildingCollider() => _collider;
         public List<Path.Path> GetAttachedPaths() => attachedPaths;
         public void AttachPath(Path.Path path) => attachedPaths.Add(path);
 
@@ -92,11 +97,12 @@ namespace Buildings
                 team = teamToChange;
                 _buildingTeam.ChangeTeamTo(team);
             }
+            
             _indicating.ResetPathCountIndicating();
             UpdateUnitSpawnPower();
-
-
             Instantiate(buildingChangeParticles, particleSpawnPoint.position, Quaternion.identity);
+            
+            BuildingsCounting.GetInstance().CheckPlayerWinOrFail();
         }
 
         public void UpdateUnitSpawnPower()

@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6341876345849974807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6341876345849974806}
+  - component: {fileID: 6341876345849974805}
+  m_Layer: 0
+  m_Name: TeamColors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6341876345849974806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341876345849974807}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6341876345849974805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341876345849974807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e094665b304d2748a424561d5d6ddf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainBuildingMaterials:
+  - {fileID: 2100000, guid: e663493286a84d043b33557879412770, type: 2}
+  - {fileID: 2100000, guid: 8af480c479bc5c34a92be46879f2d542, type: 2}
+  - {fileID: 2100000, guid: 090c292e3e451ab47884cb3024be26dd, type: 2}
+  buildingNameMaterials:
+  - {fileID: 2100000, guid: 9625dee98a18f40499910d8d946c849d, type: 2}
+  - {fileID: 2100000, guid: c492fc617b46de143a768496c82c6fdc, type: 2}
+  - {fileID: 2100000, guid: 32218ad335f2efe4185d916d441d8727, type: 2}
+  buildingPathsCountIndicatorColors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.12962577, g: 0.6792453, b: 0.0025631392, a: 1}
+  - {r: 0.021787068, g: 0.4503523, b: 0.6792453, a: 1}
+  - {r: 0.9528302, g: 0.1606146, b: 0.10247413, a: 1}
+  lineMaterials:
+  - {fileID: 2100000, guid: e663493286a84d043b33557879412770, type: 2}
+  - {fileID: 2100000, guid: 1bc2fc02e1802b34eb7ceff0d18a733e, type: 2}
+  - {fileID: 2100000, guid: 3723925194f20b14a96474e297832a86, type: 2}
+  - {fileID: 2100000, guid: 2d5d38bad2e6a014f9c83f1249f723f3, type: 2}
+  unitsPrefabs:
+  - {fileID: 243076818759157925, guid: a51992463a5aee7498eefed6029b783a, type: 3}
+  - {fileID: 1243222930170301792, guid: 5a8d40e3f7ab6e94695f9384d1111c11, type: 3}
+  - {fileID: 516224904770964824, guid: c9108fa4b80055549b758acc8584a21f, type: 3}
+  - {fileID: 1889760778800499905, guid: 4d31715953b014e449388d461d930cd8, type: 3}
+  unitsMonYardPrefabs:
+  - {fileID: 243076818759157925, guid: e2f17ad8b6b8ed04daf72eb8437360c3, type: 3}
+  - {fileID: 3800031902789797373, guid: ff609d51ab517d244a7b51469d8135da, type: 3}
+  - {fileID: 1230867120464228144, guid: 75ad6b26a50927d49b2f27ebd2b49657, type: 3}
+  - {fileID: 5515165615560572364, guid: 42dcb36087a51844193511a95c669da3, type: 3}

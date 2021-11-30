@@ -36,6 +36,7 @@ namespace EnemyAI
             }
         }
 
+        public bool IsDefeated() => _isDefeated;
         public void AddBuildingToOwn(Building building) => buildingsOnOwn.Add(building);
 
         public void RemoveBuildingFromOwn(Building building) => buildingsOnOwn.Remove(

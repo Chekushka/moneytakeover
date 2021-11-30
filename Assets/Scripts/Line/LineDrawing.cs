@@ -66,7 +66,7 @@ namespace Line
             _currentTeamMaterial = material;
         }
         
-        public void SetLineError(bool value)
+        private void SetLineError(bool value)
         {
             _lineRenderer.material = value ? errorMaterial : _currentTeamMaterial;
             isError = value;
