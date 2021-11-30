@@ -20,8 +20,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 5930a2cf4b06d4747878f6bdaad8d95f, type: 3}
-        m_Scale: {x: 3, y: 3}
+        m_Texture: {fileID: 2800000, guid: 1d2d37743b4a417489980511e11c0fd8, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -74,8 +74,8 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FoamSmooth: 0.02
-    - _FoamSpread: 0.39
-    - _FoamStrength: 0.8
+    - _FoamSpread: 0.8
+    - _FoamStrength: 0.875
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -84,11 +84,11 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RampSmooth: 0.77
-    - _RampSmoothing: 0.1
-    - _RampThreshold: 0.5
+    - _RampSmoothing: 0.317
+    - _RampThreshold: 0.616
     - _ReceiveShadowsOff: 0
-    - _RimMax: 1
-    - _RimMin: 0.4
+    - _RimMax: 1.72
+    - _RimMin: 0.21
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
