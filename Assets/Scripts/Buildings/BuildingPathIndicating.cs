@@ -10,14 +10,14 @@ namespace Buildings
         [SerializeField] private int availablePathsCount = 1;
         [SerializeField] private int pathsCount;
         [SerializeField] private List<BuildingPathIndicatorsGroup> pathIndicators;
-        [SerializeField] private SpriteRenderer indicatorsBackground;
+        [SerializeField] private SpriteRenderer indicatorsTextPanelBackground;
 
         private Building _building;
 
         private void Start()
         {
             _building = GetComponent<Building>();
-            indicatorsBackground.color = 
+            indicatorsTextPanelBackground.color = 
                 TeamColors.GetInstance().GetBuildingPathsCountIndicatorColor(_building.GetTeam());
         }
 
@@ -31,7 +31,7 @@ namespace Buildings
             availablePathsCount = 1;
             pathsCount = 0;
 
-            indicatorsBackground.color = 
+            indicatorsTextPanelBackground.color = 
                 TeamColors.GetInstance().GetBuildingPathsCountIndicatorColor(_building.GetTeam());
         }
 

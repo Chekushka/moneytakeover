@@ -5,7 +5,6 @@ namespace Buildings
 {
     public class BuildingAvailablePathsFinding : MonoBehaviour
     {
-        [SerializeField] private LayerMask layerMask;
         private Building _building;
 
         private void Start()

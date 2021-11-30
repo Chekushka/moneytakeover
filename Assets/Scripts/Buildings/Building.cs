@@ -24,14 +24,13 @@ namespace Buildings
         private BuildingPathIndicating _indicating;
         private PathCreating _pathCreating;
         private Vector3 _linePos;
-        private Collider _collider;
+        private int _unitCount;
         private const float LineYPos = 0.1f;
 
         private void Awake()
         {
             _buildingTeam = GetComponent<BuildingTeamSetting>();
             _indicating = GetComponent<BuildingPathIndicating>();
-            _collider = GetComponent<Collider>();
             _pathCreating = FindObjectOfType<PathCreating>();
             _linePos = transform.position;
             _linePos.y = LineYPos;
@@ -40,9 +39,10 @@ namespace Buildings
         public Team GetTeam() => team;
         public BuildingType GetBuildingType() => type;
         public Vector3 GetLinePos() => _linePos;
+        public int GetUnitCount() => _unitCount;
+        public int SetUnitCount(int count) => _unitCount = count;
         public List<Building> GetAvailableBuildingsToPath() => availableBuildingsToPath;
         public void SetAvailableBuildingToPath(List<Building> buildings) => availableBuildingsToPath = buildings;
-        public Collider GetBuildingCollider() => _collider;
         public List<Path.Path> GetAttachedPaths() => attachedPaths;
         public void AttachPath(Path.Path path) => attachedPaths.Add(path);
 
@@ -57,8 +57,12 @@ namespace Buildings
         public void ChangeBuildingTeam(Team teamToChange)
         {
             foreach (var path in attachedPaths)
-                Destroy(path.gameObject);
-            attachedPaths.Clear();
+            {
+                if(path.IsPathInBattle())
+                    _pathCreating.CreateLineAfterBattle(path);
+                else
+                    RemovePath(path);
+            }
 
             if (teamToChange != TeamAssignment.GetInstance().GetPlayerTeam())
             {
@@ -101,8 +105,6 @@ namespace Buildings
             _indicating.ResetPathCountIndicating();
             UpdateUnitSpawnPower();
             Instantiate(buildingChangeParticles, particleSpawnPoint.position, Quaternion.identity);
-            
-            BuildingsCounting.GetInstance().CheckPlayerWinOrFail();
         }
 
         public void UpdateUnitSpawnPower()

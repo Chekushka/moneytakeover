@@ -9,12 +9,12 @@ namespace Buildings
     public class BuildingUnitCount : MonoBehaviour
     {
         [SerializeField] private int unitCount = 10;
-        [SerializeField] private int maxUnitCount = 65;
         [SerializeField] private TextMeshPro countText;
 
         private Building _building;
         private BuildingPathIndicating _pathIndicating;
         private BuildingGrowing _buildingGrowing;
+        private int _maxUnitCount;
         private const int UnitLayer = 7;
 
         private void Start()
@@ -22,14 +22,17 @@ namespace Buildings
             _building = GetComponent<Building>();
             _pathIndicating = GetComponent<BuildingPathIndicating>();
             _buildingGrowing = GetComponent<BuildingGrowing>();
+            _maxUnitCount = BuildingsCounting.GetInstance().GetMaxUnitCount();
         }
 
         private void Update()
         {
-            if(unitCount < maxUnitCount)
+            if(unitCount < _maxUnitCount)
                 countText.text = unitCount.ToString();
-            if (unitCount == maxUnitCount)
+            if (unitCount == _maxUnitCount)
                 countText.text = "MAX";
+            
+            _building.SetUnitCount(unitCount);
         }
         
         private void OnTriggerEnter(Collider other)
@@ -44,7 +47,7 @@ namespace Buildings
 
             if (unit.GetTeam() == _building.GetTeam())
             {
-                if (unitCount < maxUnitCount)
+                if (unitCount < _maxUnitCount)
                 {
                     if (unit.GetUnitType() == BuildingType.MonetaryYard)
                     {

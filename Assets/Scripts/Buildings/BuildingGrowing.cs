@@ -60,7 +60,5 @@ namespace Buildings
             _activeBuildingLevels.Remove(buildingLevels[_currentLevel]);
             _currentLevel--;
         }
-
-        public bool IsBuildingLevelsWasIncreased() => _activeBuildingLevels.Count > 0;
     }
 }
