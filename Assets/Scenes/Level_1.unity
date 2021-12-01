@@ -1010,40 +1010,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 828350029}
     m_Modifications:
     - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 472003813}
-    - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneTransitions, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 36887624, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 163248819562671836, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
       propertyPath: m_Name
       value: Level Complete
-      objectReference: {fileID: 0}
-    - target: {fileID: 163248819562671836, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 163248819562671837, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
       propertyPath: m_Pivot.x
