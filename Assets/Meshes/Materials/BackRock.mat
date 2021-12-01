@@ -135,8 +135,8 @@ Material:
     - _OutlineWidth: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
-    - _RampBands: 14
-    - _RampBandsSmoothing: 0.706
+    - _RampBands: 16
+    - _RampBandsSmoothing: 1
     - _RampOffset: 0
     - _RampScale: 1
     - _RampSmoothing: 1
@@ -179,7 +179,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.8962264, g: 0.40204704, b: 0.29169634, a: 1}
+    - _BaseColor: {r: 0.7924528, g: 0.38223907, b: 0.2878248, a: 1}
     - _Color: {r: 0.7812595, g: 0.44750363, b: 0.31027773, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
