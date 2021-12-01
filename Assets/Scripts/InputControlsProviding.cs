@@ -1,6 +1,6 @@
 using Buildings;
 using Line;
-using Path;
+using Paths;
 using UnityEngine;
 
 public class InputControlsProviding : MonoBehaviour

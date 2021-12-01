@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using EnemyAI;
-using Path;
+using Paths;
 using UnityEngine;
 
 namespace Buildings
@@ -13,7 +12,7 @@ namespace Buildings
     {
         [SerializeField] private Team team;
         [SerializeField] private BuildingType type;
-        [SerializeField] private List<Path.Path> attachedPaths;
+        [SerializeField] private List<Path> attachedPaths;
         [SerializeField] private List<Building> availableBuildingsToPath;
         [SerializeField] private GameObject buildingChangeParticles;
         [SerializeField] private Transform particleSpawnPoint;
@@ -43,10 +42,10 @@ namespace Buildings
         public int SetUnitCount(int count) => _unitCount = count;
         public List<Building> GetAvailableBuildingsToPath() => availableBuildingsToPath;
         public void SetAvailableBuildingToPath(List<Building> buildings) => availableBuildingsToPath = buildings;
-        public List<Path.Path> GetAttachedPaths() => attachedPaths;
-        public void AttachPath(Path.Path path) => attachedPaths.Add(path);
+        public List<Path> GetAttachedPaths() => attachedPaths;
+        public void AttachPath(Path path) => attachedPaths.Add(path);
 
-        public void RemovePath(Path.Path path)
+        public void RemovePath(Path path)
         {
             _indicating.DecreasePathsCount();
             var pathToRemove = attachedPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());

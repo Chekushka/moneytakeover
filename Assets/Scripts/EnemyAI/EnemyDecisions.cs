@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Buildings;
-using Path;
+using Paths;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
