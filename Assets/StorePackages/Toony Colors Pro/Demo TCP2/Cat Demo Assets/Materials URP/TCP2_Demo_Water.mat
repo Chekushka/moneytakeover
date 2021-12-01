@@ -21,7 +21,7 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 5930a2cf4b06d4747878f6bdaad8d95f, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -74,7 +74,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FoamSmooth: 0.02
-    - _FoamSpread: 0.92
+    - _FoamSpread: 2
     - _FoamStrength: 0.8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -112,4 +112,3 @@ Material:
     - _HColor: {r: 0.9485294, g: 0.9485294, b: 0.9485294, a: 1}
     - _RimColor: {r: 0.071450196, g: 0.15578483, b: 0.294, a: 0.078431375}
     - _SColor: {r: 0, g: 0.31257612, b: 0.6764706, a: 1}
-  m_BuildTextureStacks: []

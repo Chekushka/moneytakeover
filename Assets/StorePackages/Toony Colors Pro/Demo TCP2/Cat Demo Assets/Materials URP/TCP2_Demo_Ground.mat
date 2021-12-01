@@ -29,7 +29,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BlendTex2:
         m_Texture: {fileID: 2800000, guid: 379dbc64b9e961945bb85ccde59979cd, type: 3}
-        m_Scale: {x: 1.5, y: 1.5}
+        m_Scale: {x: 0.75, y: 0.75}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: de3d69e834491a34e9aceb298acdefa2, type: 3}
@@ -130,4 +130,3 @@ Material:
     - _ShadowColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _VColorBlendOffset: {r: 1, g: 0.5, b: 0, a: 0}
     - _VColorBlendSmooth: {r: 0.3, g: 0.65, b: 0.25, a: 0.25}
-  m_BuildTextureStacks: []
