@@ -38,7 +38,11 @@ public class Unit : MonoBehaviour
          unitSpeed * Time.deltaTime);
       
       var lookAtPos = _targetPos - transform.position;
-      var newRotation = Quaternion.LookRotation(lookAtPos);
+      var newRotation = Quaternion.identity;
+      if (lookAtPos == Vector3.zero)
+         Destroy(gameObject);
+      else
+         newRotation = Quaternion.LookRotation(lookAtPos);
       transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * unitRotationSpeed);
    }
 

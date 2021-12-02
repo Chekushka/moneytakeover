@@ -50,17 +50,17 @@ namespace Buildings
             _indicating.DecreasePathsCount();
             var pathToRemove = attachedPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             attachedPaths.Remove(pathToRemove);
-            Destroy(pathToRemove.gameObject);
+            Destroy(path.gameObject);
         }
 
         public void ChangeBuildingTeam(Team teamToChange)
         {
-            foreach (var path in attachedPaths)
+            for(var i = 0; i < attachedPaths.Count; i++)
             {
-                if(path.IsPathInBattle())
-                    _pathCreating.CreateLineAfterBattle(path);
+                if(attachedPaths[i].IsPathInBattle())
+                    _pathCreating.CreateLineAfterBattle(attachedPaths[i]);
                 else
-                    RemovePath(path);
+                    RemovePath(attachedPaths[i]);
             }
 
             if (teamToChange != TeamAssignment.GetInstance().GetPlayerTeam())

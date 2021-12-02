@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using EnemyAI;
 
@@ -19,7 +17,6 @@ public class TeamAssignment : MonoBehaviour
    }
     
    public static TeamAssignment GetInstance() => _instance;
-
-   public Team GetPlayerTeam() => playerTeam;   
+   public Team GetPlayerTeam() => playerTeam;
    public EnemyDecisions GetEnemyByTeam(Team team) => enemies[(int)team];
 }
