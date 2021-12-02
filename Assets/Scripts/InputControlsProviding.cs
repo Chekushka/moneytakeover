@@ -29,12 +29,10 @@ public class InputControlsProviding : MonoBehaviour
         var touch = Input.GetTouch(0);
        
         var ray = Camera.main.ScreenPointToRay(touch.position);
-        
-
-        if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, inputLayerMask)) return;
+   
+        if (!Physics.Raycast(ray, out var hit, inputLayerMask)) return;
         if (hit.collider == null) return;
-        
-        Debug.Log("VAR");
+
         if (touch.phase == TouchPhase.Began && hit.collider.gameObject.layer == BuildingLayer)
         {
             _startBuilding = hit.transform.GetComponent<Building>();

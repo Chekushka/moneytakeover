@@ -48,6 +48,3 @@ TagManager:
   - name: BuildingPanel
     uniqueID: 4294628419
     locked: 0
-  - name: UiParticles
-    uniqueID: 108644179
-    locked: 0

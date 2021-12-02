@@ -92,9 +92,9 @@ namespace EnemyAI
                 Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
                 if (Random.value >= 0.6)
                 {
-                    var building = buildingsOnOwn[Random.Range(0, buildingsOnOwn.Count)];
-                    var path = building.GetAttachedPaths()[Random.Range(0, building.GetAttachedPaths().Count)];
-
+                    var path = buildingsOnOwn[Random.Range(0,
+                        buildingsOnOwn.Count)].GetAttachedPaths()[Random.Range(0, buildingsOnOwn.Count)];
+                        
                     if(path.IsPathInBattle())
                         _pathCreating.CreateLineAfterBattle(path);
                     else
