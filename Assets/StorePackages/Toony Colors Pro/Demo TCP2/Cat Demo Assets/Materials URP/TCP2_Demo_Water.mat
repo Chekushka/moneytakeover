@@ -70,11 +70,11 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
-    - _DepthDistance: 0.87
+    - _DepthDistance: 1.13
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _FoamSmooth: 0.02
-    - _FoamSpread: 2
+    - _FoamSpread: 1.23
     - _FoamStrength: 0.8
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -93,11 +93,11 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _UVWaveAmplitude: 0.05
-    - _UVWaveFrequency: 1
+    - _UVWaveAmplitude: 0.001
+    - _UVWaveFrequency: 0
     - _UVWaveSpeed: 1
-    - _WaveFrequency: 2
-    - _WaveHeight: 0.03
+    - _WaveFrequency: 0
+    - _WaveHeight: 0.01
     - _WaveSpeed: 1
     - _ZWrite: 1
     - __dummy__: 0
