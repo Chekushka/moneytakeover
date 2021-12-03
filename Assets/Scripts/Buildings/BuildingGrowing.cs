@@ -36,13 +36,15 @@ namespace Buildings
             var newPos = new Vector3(endLevelPos.x, endLevelPos.y + levelMesh.bounds.size.y,
                 endLevelPos.z);
             endLevel.transform.position = newPos;
-
+            
             _activeBuildingLevels.Add(buildingLevels[_currentLevel]);
             _currentLevel++;
         }
         public void RemoveBuildingLevel()
         {
-            buildingLevels[_currentLevel].SetActive(false);
+            if (_currentLevel <= 0) return;
+            buildingLevels[_currentLevel - 1].SetActive(false);
+            _activeBuildingLevels.Remove(buildingLevels[_currentLevel - 1]);
 
             foreach (var level in _activeBuildingLevels)
             {
@@ -56,8 +58,7 @@ namespace Buildings
             var newPos = new Vector3(endLevelPos.x, endLevelPos.y - levelMesh.bounds.size.y,
                 endLevelPos.z);
             endLevel.transform.position = newPos;
-
-            _activeBuildingLevels.Remove(buildingLevels[_currentLevel]);
+            
             _currentLevel--;
         }
     }

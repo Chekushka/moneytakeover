@@ -36,11 +36,10 @@ namespace Paths
                     unitPrefab = TeamColors.GetInstance().GetMonYardUnitPrefab(_unitPath.GetPathTeam());
                     break;
                 case BuildingType.Exchange:
-                    // unitPrefab =
+                    unitPrefab = TeamColors.GetInstance().GetExchangeUnitPrefab(_unitPath.GetPathTeam());
                     break;
             }
-
-
+            
             var newUnit = Instantiate(unitPrefab, unitStartPos, unitStartRotation, _unitParent);
             newUnit.SetTargetPos(_unitPath.GetPathEndPos());
             newUnit.startBuilding = _unitPath.GetStartBuilding();

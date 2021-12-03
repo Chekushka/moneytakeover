@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1670585498876043199}
   - component: {fileID: 3516163285986323317}
   m_Layer: 0
-  m_Name: EnaLogo
+  m_Name: UanLogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2596226828151031341, guid: 7235a6686c1ad0942a5922d087e37816, type: 3}
+  - {fileID: 2100000, guid: fdc93ea087e1f6649b81c8be9cfe967d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -29,21 +29,21 @@ namespace Line
             var distance = Vector3.Distance(StartPos, EndPos);
             var direction = (EndPos - StartPos).normalized;
 
-            if (Physics.Raycast(StartPos, direction, out var hit, distance, layerMask) && hit.collider != null
-                && hit.collider.gameObject.GetInstanceID() != _startBuilding.gameObject.GetInstanceID())
-            {
-                if (hit.transform.GetComponent<Building>() != null)
-                    SetLineError(EndPos != hit.transform.GetComponent<Building>().GetLinePos());
-                else
-                    SetLineError(true);
-            }
-            else
-                SetLineError(false);
-            
             if(_startBuilding != null &&!_startBuilding.GetIndicatingComponent().IsPathCreationAvailable())
                 SetLineError(true);
             else
-                SetLineError(false);
+            {
+                if (Physics.Raycast(StartPos, direction, out var hit, distance, layerMask) && hit.collider != null
+                    && hit.collider.gameObject.GetInstanceID() != _startBuilding.gameObject.GetInstanceID())
+                {
+                    if (hit.transform.GetComponent<Building>() != null)
+                        SetLineError(EndPos != hit.transform.GetComponent<Building>().GetLinePos());
+                    else
+                        SetLineError(true);
+                }   
+                else
+                    SetLineError(false);
+            }
 
         }
 

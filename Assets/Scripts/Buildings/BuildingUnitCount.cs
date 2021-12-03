@@ -32,7 +32,7 @@ namespace Buildings
             StartCoroutine(IncreaseUnitCount());
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if(unitCount < _maxUnitCount)
                 countText.text = unitCount.ToString();

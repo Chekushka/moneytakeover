@@ -50,7 +50,7 @@ public class Unit : MonoBehaviour
    private void OnCollisionEnter(Collision other)
    {
       if (other.gameObject.CompareTag(gameObject.tag) 
-          || _targetPos != other.gameObject.GetComponent<Unit>().startBuilding.GetLinePos())
+          || _targetPos != other.gameObject.GetComponent<Unit>().startBuilding.GetLinePos() && other.collider != null)
          Physics.IgnoreCollision(other.collider, _collider);
       else
       {
