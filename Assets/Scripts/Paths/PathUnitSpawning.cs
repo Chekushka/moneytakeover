@@ -44,6 +44,7 @@ namespace Paths
             var newUnit = Instantiate(unitPrefab, unitStartPos, unitStartRotation, _unitParent);
             newUnit.SetTargetPos(_unitPath.GetPathEndPos());
             newUnit.startBuilding = _unitPath.GetStartBuilding();
+            
         }
     }
 }

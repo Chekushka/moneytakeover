@@ -1,5 +1,6 @@
 using System.Collections;
 using Buildings;
+using Paths;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
@@ -12,7 +13,7 @@ public class Unit : MonoBehaviour
    [SerializeField] private GameObject deathParticles;
 
    public Building startBuilding;
-
+   
    private Animator _unitAnimator;
    private Vector3 _targetPos;
    private Collider _collider;
@@ -48,7 +49,8 @@ public class Unit : MonoBehaviour
 
    private void OnCollisionEnter(Collision other)
    {
-      if (other.gameObject.CompareTag(gameObject.tag))
+      if (other.gameObject.CompareTag(gameObject.tag) 
+          || _targetPos != other.gameObject.GetComponent<Unit>().startBuilding.GetLinePos())
          Physics.IgnoreCollision(other.collider, _collider);
       else
       {

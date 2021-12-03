@@ -7,16 +7,14 @@ namespace Line
     {
         [SerializeField] private Material errorMaterial;
         [SerializeField] private LayerMask layerMask;
+        [SerializeField] private bool isError;
         public Vector3 StartPos { get; set; } = Vector3.zero;
         public Vector3 EndPos { get; set; } = Vector3.zero;
-
-        public bool isError;
 
         private Building _startBuilding;
         private LineRenderer _lineRenderer;
         private Vector3[] _positions;
         private Material _currentTeamMaterial;
-        private const int BarrierLayer = 11;
 
         private void Awake()
         {
@@ -42,6 +40,11 @@ namespace Line
             else
                 SetLineError(false);
             
+            if(_startBuilding != null &&!_startBuilding.GetIndicatingComponent().IsPathCreationAvailable())
+                SetLineError(true);
+            else
+                SetLineError(false);
+
         }
 
         public void RemoveLine()
@@ -59,6 +62,8 @@ namespace Line
             SetBasicLine();
             _lineRenderer.SetPositions(_positions);
         }
+
+        public bool IsLineError() => isError;
 
         public void SetLineTeamMaterial(Material material)
         {

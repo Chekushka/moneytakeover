@@ -21,15 +21,16 @@ namespace Buildings
 
         private BuildingTeamSetting _buildingTeam;
         private BuildingPathIndicating _indicating;
+        private BuildingUnitCount _unitCount;
         private PathCreating _pathCreating;
         private Vector3 _linePos;
-        private int _unitCount;
         private const float LineYPos = 0.1f;
 
         private void Awake()
         {
             _buildingTeam = GetComponent<BuildingTeamSetting>();
             _indicating = GetComponent<BuildingPathIndicating>();
+            _unitCount = GetComponent<BuildingUnitCount>();
             _pathCreating = FindObjectOfType<PathCreating>();
             _linePos = transform.position;
             _linePos.y = LineYPos;
@@ -37,9 +38,9 @@ namespace Buildings
 
         public Team GetTeam() => team;
         public BuildingType GetBuildingType() => type;
+        public BuildingPathIndicating GetIndicatingComponent() => _indicating;
         public Vector3 GetLinePos() => _linePos;
-        public int GetUnitCount() => _unitCount;
-        public int SetUnitCount(int count) => _unitCount = count;
+        public int GetUnitCount() => _unitCount.GetUnitCount();
         public List<Building> GetAvailableBuildingsToPath() => availableBuildingsToPath;
         public void SetAvailableBuildingToPath(List<Building> buildings) => availableBuildingsToPath = buildings;
         public List<Path> GetAttachedPaths() => attachedPaths;
@@ -102,6 +103,7 @@ namespace Buildings
             }
             
             _indicating.ResetPathCountIndicating();
+            _unitCount.ResetUnitCount();
             UpdateUnitSpawnPower();
             Instantiate(buildingChangeParticles, particleSpawnPoint.position, Quaternion.identity);
         }
@@ -111,6 +113,9 @@ namespace Buildings
             var pathsEndThis = _pathCreating.GetPathsList().Where(x => x.GetEndBuilding().
                 gameObject.GetInstanceID() == gameObject.GetInstanceID() && x.GetPathTeam() == team).ToList();
             unitSpawnPower = pathsEndThis.Count;
+
+            if (_unitCount.IsCountMax())
+                unitSpawnPower *= 2;
         }
     }
 

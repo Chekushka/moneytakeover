@@ -51,6 +51,9 @@ namespace Buildings
         {
             if (availablePathsCount <= 1) return;
             
+            if(_building.GetAttachedPaths().Count > 0)
+                _building.RemovePath(_building.GetAttachedPaths()[_building.GetAttachedPaths().Count - 1]);
+            
             pathIndicators[availablePathsCount - 1].ClearAllCircles();
             pathIndicators[availablePathsCount - 1].gameObject.SetActive(false);
             

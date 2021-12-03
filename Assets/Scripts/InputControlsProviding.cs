@@ -66,7 +66,7 @@ public class InputControlsProviding : MonoBehaviour
                     lineDrawing.SetLinePos();
                 }
             }
-
+            
             if (_startBuilding == null)
             {
                 lineRemover.SetActive(true);
@@ -77,15 +77,13 @@ public class InputControlsProviding : MonoBehaviour
 
         if (hit.collider.gameObject.layer != BuildingLayer &&
             touch.phase == TouchPhase.Moved && _startBuilding != null)
-        {
             _endBuilding = null;
-        }
 
         if (touch.phase == TouchPhase.Ended)
         {
             lineDrawing.RemoveLine();
-            if (_startBuilding != null && _endBuilding != null && !lineDrawing.isError &&
-                _startBuilding.GetComponent<BuildingPathIndicating>().IsPathCreationAvailable())
+            if (_startBuilding != null && _endBuilding != null && !lineDrawing.IsLineError() &&
+                _startBuilding.GetIndicatingComponent().IsPathCreationAvailable())
                 _pathCreating.CreatePath(_startBuilding, _endBuilding, _startBuilding.GetTeam());
             _startBuilding = null;
             _endBuilding = null;
