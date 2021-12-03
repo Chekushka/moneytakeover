@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Paths;
 using UnityEngine;
 
 namespace Buildings
@@ -13,10 +14,12 @@ namespace Buildings
         [SerializeField] private SpriteRenderer indicatorsTextPanelBackground;
 
         private Building _building;
+        private PathCreating _pathCreating;
 
         private void Start()
         {
             _building = GetComponent<Building>();
+            _pathCreating = FindObjectOfType<PathCreating>();
             indicatorsTextPanelBackground.color = 
                 TeamColors.GetInstance().GetBuildingPathsCountIndicatorColor(_building.GetTeam());
         }
@@ -50,10 +53,16 @@ namespace Buildings
         public void DecreaseAvailablePathsCount()
         {
             if (availablePathsCount <= 1) return;
-            
-            if(_building.GetAttachedPaths().Count > 0)
-                _building.RemovePath(_building.GetAttachedPaths()[_building.GetAttachedPaths().Count - 1]);
-            
+
+            if (_building.GetAttachedPaths().Count > 0)
+            {
+                var pathToRemove = _building.GetAttachedPaths()[_building.GetAttachedPaths().Count - 1];
+                if (pathToRemove.IsPathInBattle())
+                    _pathCreating.CreateLineAfterBattle(pathToRemove);
+                else
+                    _pathCreating.RemovePath(pathToRemove);
+            }
+
             pathIndicators[availablePathsCount - 1].ClearAllCircles();
             pathIndicators[availablePathsCount - 1].gameObject.SetActive(false);
             

@@ -9,8 +9,7 @@ namespace Paths
     {
         [SerializeField] private List<Path> createdPaths;
         [SerializeField] private Path pathPrefab;
-        [SerializeField] private Transform pathsParent;
-    
+
         public void CreatePath(Building start, Building end, Team team)
         {
             if (GetPathByPoints(start, end) != null) return;
@@ -43,10 +42,10 @@ namespace Paths
 
         public void RemovePath(Path path)
         {
-            path.GetStartBuilding().RemovePath(path);
             var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(pathToRemove);
             path.GetEndBuilding().UpdateUnitSpawnPower();
+            path.GetStartBuilding().RemovePath(path);
         }
 
         public void CreateLineAfterBattle(Path removedPath)
@@ -69,7 +68,7 @@ namespace Paths
 
         private void FormPath(Building start, Building end, Team team, bool isBattlePath)
         {
-            var newPath = Instantiate(pathPrefab, start.transform.position, Quaternion.identity, pathsParent);
+            var newPath = Instantiate(pathPrefab, start.transform.position, Quaternion.identity, transform);
             newPath.SetPath(start, end, team, isBattlePath);
             createdPaths.Add(newPath);
 

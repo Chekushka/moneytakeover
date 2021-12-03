@@ -115,8 +115,10 @@ MonoBehaviour:
   unitSpeed: 6
   unitRotationSpeed: 10
   team: 0
+  type: 0
   unitDestroyDelay: 1
   deathParticles: {fileID: 2264923910264730370, guid: ee5ccbe1df2660643aa0259072f930a5, type: 3}
+  healthPoints: 1
   startBuilding: {fileID: 0}
 --- !u!136 &3950539823718892922
 CapsuleCollider:

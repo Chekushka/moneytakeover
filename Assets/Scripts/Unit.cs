@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
    [SerializeField] private BuildingType type;
    [SerializeField] private float unitDestroyDelay = 2f;
    [SerializeField] private GameObject deathParticles;
+   [SerializeField] private int healthPoints = 1;
 
    public Building startBuilding;
    
@@ -49,11 +50,15 @@ public class Unit : MonoBehaviour
 
    private void OnCollisionEnter(Collision other)
    {
+      var unit = other.gameObject.GetComponent<Unit>();
       if (other.gameObject.CompareTag(gameObject.tag) 
-          || _targetPos != other.gameObject.GetComponent<Unit>().startBuilding.GetLinePos() && other.collider != null)
+          || _targetPos != unit.startBuilding.GetLinePos() && other.collider != null)
          Physics.IgnoreCollision(other.collider, _collider);
       else
       {
+         healthPoints--;
+         if (healthPoints > 0 && unit.startBuilding.GetBuildingType() != BuildingType.Exchange) return;
+         
          _isDead = true;
          _collider.enabled = false;
          transform.rotation = Quaternion.Euler(0, Random.Range(-90,90),0);

@@ -17,7 +17,7 @@ namespace Paths
             _unitPath = GetComponent<Path>();
             _unitParent = FindObjectOfType<UnitParent>().transform;
             InvokeRepeating(nameof(SpawnUnit), timeToStartSpawn, 
-                delayBetweenSpawn - _unitPath.GetStartBuilding().unitSpawnPower * 0.2f);
+                delayBetweenSpawn - _unitPath.GetStartBuilding().unitSpawnPower * 0.15f);
         }
 
         private void SpawnUnit()

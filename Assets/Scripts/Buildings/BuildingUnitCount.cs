@@ -18,7 +18,7 @@ namespace Buildings
         private BuildingGrowing _buildingGrowing;
         private int _maxUnitCount;
         private int _lastUnitCount;
-        private float timeToIncreaseUnitCount = 7;
+        private float timeToIncreaseUnitCount = 4;
         private const int UnitLayer = 7;
 
         private void Start()
@@ -32,9 +32,9 @@ namespace Buildings
             StartCoroutine(IncreaseUnitCount());
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if(unitCount < _maxUnitCount)
+            if(unitCount < _maxUnitCount && unitCount >= 0)
                 countText.text = unitCount.ToString();
             if (unitCount >= _maxUnitCount)
                 countText.text = "MAX";
@@ -60,6 +60,17 @@ namespace Buildings
                 }
             }
 
+            if (unitCount < 10)
+            {
+                if(_pathIndicating.GetAvailablePathsCount() == 2)
+                    _pathIndicating.DecreaseAvailablePathsCount();
+                
+                if (_pathIndicating.GetAvailablePathsCount() == 3)
+                {
+                    _pathIndicating.DecreaseAvailablePathsCount();
+                    _pathIndicating.DecreaseAvailablePathsCount();
+                }
+            }
             _lastUnitCount = unitCount;
         }
 
@@ -74,7 +85,7 @@ namespace Buildings
 
             if(unit.startBuilding.GetInstanceID() == _building.GetInstanceID()) return;
 
-            if (unitCount == 0 && unit.GetTeam() != _building.GetTeam())
+            if (unitCount <= 0 && unit.GetTeam() != _building.GetTeam())
                 _building.ChangeBuildingTeam(unit.GetTeam());
 
             if (unit.GetTeam() == _building.GetTeam())

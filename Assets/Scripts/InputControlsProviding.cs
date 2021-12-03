@@ -3,6 +3,7 @@ using Buildings;
 using Line;
 using Paths;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputControlsProviding : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class InputControlsProviding : MonoBehaviour
 
     private const int BuildingLayer = 6;
 
-    private void Start()
+    private void OnEnable() => SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    private void OnDisable() =>  SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    
+    private void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(CacheComponentsWhenLoaded());
     }

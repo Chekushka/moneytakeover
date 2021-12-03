@@ -620,6 +620,7 @@ MonoBehaviour:
   type: 0
   unitDestroyDelay: 1
   deathParticles: {fileID: 2264923910264730370, guid: 020e0d044382c0944b04a951bc18c987, type: 3}
+  healthPoints: 1
   startBuilding: {fileID: 0}
 --- !u!136 &8720512549501972499
 CapsuleCollider:
