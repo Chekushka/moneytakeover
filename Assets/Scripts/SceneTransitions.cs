@@ -11,5 +11,9 @@ public class SceneTransitions : MonoBehaviour
         SceneManager.LoadScene(scene.name);
     }
 
-    public void LoadScene(int sceneNumber) => SceneManager.LoadScene(sceneNumber);
+    public void LoadNextScene()
+    {
+        var scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.buildIndex + 1);
+    }
 }

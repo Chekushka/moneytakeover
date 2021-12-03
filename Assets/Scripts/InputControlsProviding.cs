@@ -1,3 +1,4 @@
+using System.Collections;
 using Buildings;
 using Line;
 using Paths;
@@ -8,9 +9,9 @@ public class InputControlsProviding : MonoBehaviour
     [SerializeField] private LineDrawing lineDrawing;
     [SerializeField] private GameObject lineRemover;
     [SerializeField] private LayerMask inputLayerMask;
-    [SerializeField] private PathCreating pathCreating;
 
     private Team _playerTeam;
+    private PathCreating _pathCreating;
     private Building _startBuilding;
     private Building _endBuilding;
     private bool _isRemoverActive;
@@ -19,8 +20,7 @@ public class InputControlsProviding : MonoBehaviour
 
     private void Start()
     {
-        _playerTeam = TeamAssignment.GetInstance().GetPlayerTeam();
-        lineDrawing.SetLineTeamMaterial(TeamColors.GetInstance().GetLineMaterial(_playerTeam));
+        StartCoroutine(CacheComponentsWhenLoaded());
     }
 
     private void Update()
@@ -30,7 +30,7 @@ public class InputControlsProviding : MonoBehaviour
        
         var ray = Camera.main.ScreenPointToRay(touch.position);
    
-        if (!Physics.Raycast(ray, out var hit, inputLayerMask)) return;
+        if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, inputLayerMask)) return;
         if (hit.collider == null) return;
 
         if (touch.phase == TouchPhase.Began && hit.collider.gameObject.layer == BuildingLayer)
@@ -86,12 +86,20 @@ public class InputControlsProviding : MonoBehaviour
             lineDrawing.RemoveLine();
             if (_startBuilding != null && _endBuilding != null && !lineDrawing.isError &&
                 _startBuilding.GetComponent<BuildingPathIndicating>().IsPathCreationAvailable())
-                pathCreating.CreatePath(_startBuilding, _endBuilding, _startBuilding.GetTeam());
+                _pathCreating.CreatePath(_startBuilding, _endBuilding, _startBuilding.GetTeam());
             _startBuilding = null;
             _endBuilding = null;
             
             lineRemover.SetActive(false);
             _isRemoverActive = false;
         }
+    }
+
+    private IEnumerator CacheComponentsWhenLoaded()
+    {
+        yield return new WaitUntil(() => TeamAssignment.GetInstance() != null);
+        _playerTeam = TeamAssignment.GetInstance().GetPlayerTeam();
+        _pathCreating = FindObjectOfType<PathCreating>();
+        lineDrawing.SetLineTeamMaterial(TeamColors.GetInstance().GetLineMaterial(_playerTeam));
     }
 }

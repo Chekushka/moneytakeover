@@ -8,6 +8,7 @@ TagManager:
   - UnitDollar
   - UnitEuro
   - UnitYuan
+  - UiCamera
   layers:
   - Default
   - TransparentFX

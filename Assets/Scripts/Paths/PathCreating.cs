@@ -80,8 +80,6 @@ namespace Paths
             
             start.GetComponent<BuildingPathIndicating>().IncreasePathsCount();
             start.AttachPath(newPath);
-            
-            
         }
     }
 }

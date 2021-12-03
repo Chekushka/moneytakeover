@@ -8,15 +8,8 @@ public class ProgressBarValueCalculation : MonoBehaviour
 {
     [SerializeField] private Slider progressBar;
 
-    private void Start()
-    {
-        progressBar.value = CalculateProgressBarValue() / 100;
-    }
-
-    private void Update()
-    {
-        progressBar.value = CalculateProgressBarValue() / 100;
-    }
+    private void Start() => progressBar.value = CalculateProgressBarValue() / 100;
+    private void Update() => progressBar.value = CalculateProgressBarValue() / 100;
 
     private float CalculateProgressBarValue()
     {

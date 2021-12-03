@@ -1,20 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Buildings;
 using UnityEngine;
 
 public class LevelEnding : MonoBehaviour
 {
-    [SerializeField] private GameObject winScreen;
-    [SerializeField] private GameObject loseScreen;
-
+    private FinalScreen _finalScreen;
     private void Start()
     {
+        _finalScreen = FindObjectOfType<FinalScreen>();
+        
         BuildingsCounting.OnPlayerFail += ActivateLoseScreen;
         BuildingsCounting.OnPlayerWin += ActivateWinScreen;
     }
 
-    private void ActivateWinScreen() => winScreen.SetActive(true);
-    private void ActivateLoseScreen() => loseScreen.SetActive(true);
+    private void ActivateWinScreen() => _finalScreen.GetWinScreen().SetActive(true);
+    private void ActivateLoseScreen() => _finalScreen.GetFailScreen().SetActive(true);
 }

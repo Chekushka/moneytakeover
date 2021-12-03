@@ -26,17 +26,6 @@ namespace EnemyAI
             StartCoroutine(Decide(startDecisionTime));
         }
 
-        private void Update()
-        {
-            if (buildingsOnOwn.Count == 0)
-            {
-                _isDefeated = true;
-                Debug.Log(gameObject.name + ": " + "я пагіб");
-                enabled = false;
-            }
-        }
-
-        public bool IsDefeated() => _isDefeated;
         public void AddBuildingToOwn(Building building) => buildingsOnOwn.Add(building);
 
         public void RemoveBuildingFromOwn(Building building) => buildingsOnOwn.Remove(
@@ -70,8 +59,8 @@ namespace EnemyAI
                     if (Random.value >= 0.8)
                     {
                         var path = _pathCreating.GetPathByPoints(startBuilding, endBuilding);
-                        
-                        if(path.IsPathInBattle())
+
+                        if (path.IsPathInBattle())
                             _pathCreating.CreateLineAfterBattle(path);
                         else
                             _pathCreating.RemovePath(path);
@@ -89,21 +78,37 @@ namespace EnemyAI
             else
             {
                 Debug.Log(gameObject.name + ": " + "німа доступних");
-                Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
-                if (Random.value >= 0.6)
+                if (buildingsOnOwn.Count != 0)
                 {
-                    var path = buildingsOnOwn[Random.Range(0,
-                        buildingsOnOwn.Count)].GetAttachedPaths()[Random.Range(0, buildingsOnOwn.Count)];
-                        
-                    if(path.IsPathInBattle())
-                        _pathCreating.CreateLineAfterBattle(path);
+                    Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
+                    if (Random.value >= 0.6)
+                    {
+                        var chosenBuilding = buildingsOnOwn[Random.Range(0,
+                            buildingsOnOwn.Count)];
+
+                        if (chosenBuilding.GetAttachedPaths().Count != 0)
+                        {
+                            var path =
+                                chosenBuilding.GetAttachedPaths()[
+                                    Random.Range(0, chosenBuilding.GetAttachedPaths().Count)];
+
+                            if (path.IsPathInBattle())
+                                _pathCreating.CreateLineAfterBattle(path);
+                            else
+                                _pathCreating.RemovePath(path);
+                            Debug.Log(gameObject.name + ": " + "видалив");
+                        }
+                        else
+                            Debug.Log(gameObject.name + ": " + "нема що видаляти в будинку, якому я думав видалити");
+                    }
                     else
-                        _pathCreating.RemovePath(path);
-                    Debug.Log(gameObject.name + ": " + "видалив");
+                        Debug.Log(gameObject.name + ": " + "передумав видаляти");
                 }
                 else
-                    Debug.Log(gameObject.name + ": " + "передумав видаляти");
-
+                {
+                    _isDefeated = true;
+                    Debug.Log(gameObject.name + ": " + "я пагіб");
+                }
             }
 
             if (!_isDefeated)
