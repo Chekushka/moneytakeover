@@ -408,6 +408,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7547110408342921406, guid: 3f9a95649928ca24598b539e7ba10354, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7547110408873638126, guid: 3f9a95649928ca24598b539e7ba10354, type: 3}
       propertyPath: m_Name
       value: Input
@@ -592,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1286d17234149f479577bb72f7b000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 1
+  sceneIndex: 8
 --- !u!4 &1808944946
 Transform:
   m_ObjectHideFlags: 0

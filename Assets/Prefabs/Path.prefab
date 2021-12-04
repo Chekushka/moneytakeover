@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textureScrollSpeed: 1
   team: 0
+  isBattlePath: 0
 --- !u!114 &3953359233898125632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +154,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 1
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
