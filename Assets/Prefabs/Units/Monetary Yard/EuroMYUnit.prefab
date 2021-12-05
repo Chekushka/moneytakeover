@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 1365758099584779697}
   m_Layer: 7
   m_Name: EuroMYUnit
-  m_TagString: UnitDollar
+  m_TagString: UnitEuro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,7 +210,7 @@ MonoBehaviour:
   unitSpeed: 6
   unitRotationSpeed: 10
   team: 2
-  type: 0
+  type: 1
   unitDestroyDelay: 1
   deathParticles: {fileID: 2264923910264730370, guid: af132beb70c3a3e48a57a28b089307b9, type: 3}
   healthPoints: 1

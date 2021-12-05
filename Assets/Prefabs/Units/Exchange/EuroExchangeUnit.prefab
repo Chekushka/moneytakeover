@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 6195412446853021656}
   m_Layer: 7
   m_Name: EuroExchangeUnit
-  m_TagString: UnitDollar
+  m_TagString: UnitEuro
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -710,7 +710,7 @@ MonoBehaviour:
   team: 2
   type: 2
   unitDestroyDelay: 1
-  deathParticles: {fileID: 2264923910264730370, guid: ee5ccbe1df2660643aa0259072f930a5, type: 3}
+  deathParticles: {fileID: 2264923910264730370, guid: af132beb70c3a3e48a57a28b089307b9, type: 3}
   healthPoints: 2
   startBuilding: {fileID: 0}
 --- !u!136 &7176202370753976454

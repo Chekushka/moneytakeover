@@ -4,5 +4,5 @@ public enum Team
     Dollar,
     Euro,
     Yuan,
-    Pound
+    Rupiah
 }

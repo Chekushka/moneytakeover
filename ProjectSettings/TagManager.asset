@@ -9,6 +9,7 @@ TagManager:
   - UnitEuro
   - UnitYuan
   - UiCamera
+  - UnitRupiah
   layers:
   - Default
   - TransparentFX
