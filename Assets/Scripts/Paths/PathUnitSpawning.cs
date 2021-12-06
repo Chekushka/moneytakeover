@@ -1,3 +1,4 @@
+using System.Collections;
 using Buildings;
 using UnityEngine;
 
@@ -5,19 +6,21 @@ namespace Paths
 {
     [RequireComponent(typeof(Path))]
     public class PathUnitSpawning : MonoBehaviour
-    {
-        [SerializeField] private float timeToStartSpawn = 1f;
-        [SerializeField] private float delayBetweenSpawn = 1f;
-        
+    { 
+        private float _startDelayBetweenSpawn = 1f;
         private Path _unitPath;
         private Transform _unitParent;
+        private float _currentDelay;
+        private int _multiplier;
+        private int _lastMultiplier;
 
         private void Start()
         {
             _unitPath = GetComponent<Path>();
             _unitParent = FindObjectOfType<UnitParent>().transform;
-            InvokeRepeating(nameof(SpawnUnit), timeToStartSpawn, 
-                delayBetweenSpawn - _unitPath.GetStartBuilding().unitSpawnPower * 0.15f);
+            _currentDelay = _startDelayBetweenSpawn;
+            _lastMultiplier = _multiplier;
+            StartCoroutine(SetSpawningDelay());
         }
 
         private void SpawnUnit()
@@ -43,7 +46,21 @@ namespace Paths
             var newUnit = Instantiate(unitPrefab, unitStartPos, unitStartRotation, _unitParent);
             newUnit.SetTargetPos(_unitPath.GetPathEndPos());
             newUnit.startBuilding = _unitPath.GetStartBuilding();
-            
+        }
+
+        private IEnumerator SetSpawningDelay()
+        {
+            _multiplier = _unitPath.GetStartBuilding().unitSpawnPower;
+            if (_multiplier != _lastMultiplier)
+            {
+                _currentDelay = _startDelayBetweenSpawn;
+                _currentDelay -= _multiplier * 0.1f;
+                _lastMultiplier = _multiplier;
+            }
+            yield return new WaitForSeconds(_currentDelay);
+            SpawnUnit();
+            if(this != null)
+                StartCoroutine(SetSpawningDelay());
         }
     }
 }

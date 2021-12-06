@@ -23,6 +23,7 @@ public class Unit : MonoBehaviour
 
    public Team GetTeam() => team;
    public BuildingType GetUnitType() => type;
+   public Vector3 GetTargetPos() => _targetPos;
    public void SetTargetPos(Vector3 position) => _targetPos = position;
 
    private void Start()

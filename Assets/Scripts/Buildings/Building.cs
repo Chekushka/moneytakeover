@@ -112,10 +112,8 @@ namespace Buildings
         {
             var pathsEndThis = _pathCreating.GetPathsList().Where(x => x.GetEndBuilding().
                 gameObject.GetInstanceID() == gameObject.GetInstanceID() && x.GetPathTeam() == team).ToList();
-            unitSpawnPower = pathsEndThis.Count;
 
-            if (_unitCount.IsCountMax())
-                unitSpawnPower *= 2;
+            unitSpawnPower = pathsEndThis.Count == 0 ? 0 : pathsEndThis.Count;
         }
     }
 

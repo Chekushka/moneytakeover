@@ -36,15 +36,12 @@ namespace Paths
             }
             else
                 FormPath(start, end, team, false);
-            
-            end.UpdateUnitSpawnPower();
         }
 
         public void RemovePath(Path path)
         {
             var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(pathToRemove);
-            path.GetEndBuilding().UpdateUnitSpawnPower();
             path.GetStartBuilding().RemovePath(path);
         }
 

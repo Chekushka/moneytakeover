@@ -11,70 +11,37 @@ namespace Buildings
     public class BuildingUnitCount : MonoBehaviour
     {
         [SerializeField] private int unitCount = 10;
+        [SerializeField] private int unitSpawnPowerOnMax = 4;
         [SerializeField] private TextMeshPro countText;
 
         private Building _building;
-        private BuildingPathIndicating _pathIndicating;
-        private BuildingGrowing _buildingGrowing;
         private int _maxUnitCount;
-        private int _lastUnitCount;
-        private float timeToIncreaseUnitCount = 4;
+
+        private const float TimeToIncreaseUnitCount = 4;
         private const int UnitLayer = 7;
 
         private void Start()
         {
             _building = GetComponent<Building>();
-            _pathIndicating = GetComponent<BuildingPathIndicating>();
-            _buildingGrowing = GetComponent<BuildingGrowing>();
             _maxUnitCount = BuildingsCounting.GetInstance().GetMaxUnitCount();
             
-            SetStartBuildingCount();
             StartCoroutine(IncreaseUnitCount());
         }
 
         private void Update()
         {
-            if(unitCount < _maxUnitCount && unitCount >= 0)
+            if (unitCount < _maxUnitCount && unitCount >= 0)
+            {
                 countText.text = unitCount.ToString();
+                _building.UpdateUnitSpawnPower();
+            }
             if (unitCount >= _maxUnitCount)
+            {
                 countText.text = "MAX";
-
-            if (unitCount % 10 == 0 && unitCount < _maxUnitCount)
-            {
-                if (unitCount >= 10)
-                {
-                    if (unitCount > _lastUnitCount)
-                        if(unitCount < 30)
-                            _pathIndicating.IncreaseAvailablePathsCount();
-                    
-                    if (unitCount < _lastUnitCount)
-                        _pathIndicating.DecreaseAvailablePathsCount();
-                }
-
-                if (unitCount > 10)
-                {
-                    if (unitCount > _lastUnitCount)
-                        _buildingGrowing.AddBuildingLevel();
-                    if (unitCount < _lastUnitCount)
-                        _buildingGrowing.RemoveBuildingLevel();
-                }
+                _building.unitSpawnPower = unitSpawnPowerOnMax;
             }
-
-            if (unitCount < 10)
-            {
-                if(_pathIndicating.GetAvailablePathsCount() == 2)
-                    _pathIndicating.DecreaseAvailablePathsCount();
-                
-                if (_pathIndicating.GetAvailablePathsCount() == 3)
-                {
-                    _pathIndicating.DecreaseAvailablePathsCount();
-                    _pathIndicating.DecreaseAvailablePathsCount();
-                }
-            }
-            _lastUnitCount = unitCount;
         }
-
-        public bool IsCountMax() => unitCount >= _maxUnitCount;
+        
         public int GetUnitCount() => unitCount;
         public void ResetUnitCount() => StartCoroutine(IncreaseUnitCount());
         
@@ -83,6 +50,7 @@ namespace Buildings
             if(other.gameObject.layer != UnitLayer) return;
             var unit = other.gameObject.GetComponent<Unit>();
 
+            if(unit.GetTargetPos() != _building.GetLinePos()) return;
             if(unit.startBuilding.GetInstanceID() == _building.GetInstanceID()) return;
 
             if (unitCount <= 0 && unit.GetTeam() != _building.GetTeam())
@@ -109,36 +77,12 @@ namespace Buildings
             Destroy(other.gameObject);
         }
 
-        private void SetStartBuildingCount()
-        {
-            _lastUnitCount = unitCount;
-            if (unitCount > _maxUnitCount) return;
-
-            var growMultiplier = 0;
-            if (unitCount >= 10)
-            {
-                if (unitCount >= 10 && unitCount < 20)
-                    growMultiplier = 2;
-                if (unitCount >= 20)
-                    growMultiplier = 3;
-                for (var i = 1; i < growMultiplier; i++)
-                    _pathIndicating.IncreaseAvailablePathsCount();
-            }
-
-            if (unitCount > 10)
-            {
-                growMultiplier = unitCount / 10;
-                for (var i = 1; i < growMultiplier; i++)
-                    _buildingGrowing.AddBuildingLevel();
-            }
-        }
-
         private IEnumerator IncreaseUnitCount()
         {
-            yield return new WaitForSeconds(timeToIncreaseUnitCount);
+            yield return new WaitForSeconds(TimeToIncreaseUnitCount);
             
             if(_building.GetTeam() != Team.Neutral)
-                unitCount++;
+                unitCount++;    
             if (unitCount < _maxUnitCount)
                 StartCoroutine(IncreaseUnitCount());
         }
