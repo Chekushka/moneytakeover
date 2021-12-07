@@ -56,7 +56,7 @@ namespace EnemyAI
                 if (_pathCreating.GetPathByPoints(startBuilding, endBuilding) != null)
                 {
                     Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
-                    if (Random.value >= 0.8)
+                    if (Random.value >= 0.65)
                     {
                         var path = _pathCreating.GetPathByPoints(startBuilding, endBuilding);
 
@@ -81,7 +81,7 @@ namespace EnemyAI
                 if (buildingsOnOwn.Count != 0)
                 {
                     Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
-                    if (Random.value >= 0.6)
+                    if (Random.value >= 0.5)
                     {
                         var chosenBuilding = buildingsOnOwn[Random.Range(0,
                             buildingsOnOwn.Count)];

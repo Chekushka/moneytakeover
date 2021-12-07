@@ -47,8 +47,10 @@ namespace Paths
 
         public void CreateLineAfterBattle(Path removedPath)
         {
-            var enemyPath = GetReversePath(removedPath.GetStartBuilding(), removedPath.GetEndBuilding());
-
+            //var enemyPath = GetReversePath(removedPath.GetStartBuilding(), removedPath.GetEndBuilding());
+            var enemyPath = GetPathByPoints(removedPath.GetEndBuilding(), removedPath.GetStartBuilding());
+            Debug.Log("path to remove:" + removedPath);
+            Debug.Log("enemy: " + enemyPath);
             RemovePath(removedPath);
             RemovePath(enemyPath);
             
