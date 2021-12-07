@@ -250,6 +250,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b376ef4a7bcff34fa26534f1330c1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1184361657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3974920298095369565, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
+  m_PrefabInstance: {fileID: 1664463081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1360802344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6053527390842663806, guid: db6c8b875f172fd4cb6cbe47fb421c5a, type: 3}
@@ -445,6 +450,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9a95649928ca24598b539e7ba10354, type: 3}
+--- !u!1 &1651295181 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 689576067270842485, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
+  m_PrefabInstance: {fileID: 1664463081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1664463081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -556,6 +566,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1457929668783737068, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
+      propertyPath: winText
+      value: 
+      objectReference: {fileID: 1651295181}
+    - target: {fileID: 1457929668783737068, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
+      propertyPath: failText
+      value: 
+      objectReference: {fileID: 1184361657}
     - target: {fileID: 5109919412198227558, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
       propertyPath: m_LocalScale.x
       value: 0
@@ -595,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1286d17234149f479577bb72f7b000c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 2
+  sceneIndex: 1
 --- !u!4 &1808944946
 Transform:
   m_ObjectHideFlags: 0
