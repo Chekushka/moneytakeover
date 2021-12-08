@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCount: 10
+  unitSpawnPowerOnMax: 4
   countText: {fileID: 3918094712875530326}
 --- !u!114 &407226562735580584
 MonoBehaviour:
@@ -257,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7478327179594407594, guid: 35137e343477ac24d9a0300fbf5f13b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9365413
+      value: 3.96
       objectReference: {fileID: 0}
     - target: {fileID: 7478327179594407594, guid: 35137e343477ac24d9a0300fbf5f13b9, type: 3}
       propertyPath: m_LocalPosition.z

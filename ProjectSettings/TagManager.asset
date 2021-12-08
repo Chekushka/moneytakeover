@@ -50,3 +50,6 @@ TagManager:
   - name: BuildingPanel
     uniqueID: 4294628419
     locked: 0
+  - name: UI
+    uniqueID: 1185202981
+    locked: 0

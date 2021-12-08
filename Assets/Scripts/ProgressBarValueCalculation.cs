@@ -1,14 +1,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using Buildings;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressBarValueCalculation : MonoBehaviour
 {
     [SerializeField] private Slider progressBar;
+    [SerializeField] private TextMeshProUGUI levelText;
 
-    private void Start() => progressBar.value = CalculateProgressBarValue() / 100;
+    private void Start()
+    {
+        levelText.text = "Level " + FindObjectOfType<LastPlayedLevelSaving>().GetSceneNumber();
+        progressBar.value = CalculateProgressBarValue() / 100;
+    }
+
+   
     private void Update() => progressBar.value = CalculateProgressBarValue() / 100;
 
     private float CalculateProgressBarValue()

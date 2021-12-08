@@ -41,6 +41,8 @@ namespace Buildings
             
             if(pathsCount < 4 && pathsCount > 0)
                 pathIndicators[availablePathsCount - 1].ColorCircles(pathsCount, _building.GetTeam());
+            if(pathsCount == 0)
+                pathIndicators[availablePathsCount - 1].ClearAllCircles();
         }
 
         public int GetAvailablePathsCount() => availablePathsCount;

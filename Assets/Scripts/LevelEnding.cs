@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class LevelEnding : MonoBehaviour
 {
-    private FinalScreen _finalScreen;
+    private GameUILoading _gameUILoading;
     private void Start()
     {
-        _finalScreen = FindObjectOfType<FinalScreen>();
+        _gameUILoading = FindObjectOfType<GameUILoading>();
         
         BuildingsCounting.OnPlayerFail += ActivateLoseScreen;
         BuildingsCounting.OnPlayerWin += ActivateWinScreen;
     }
 
-    private void ActivateWinScreen() => _finalScreen.GetWinScreen().SetActive(true);
-    private void ActivateLoseScreen() => _finalScreen.GetFailScreen().SetActive(true);
+    private void ActivateWinScreen() => _gameUILoading.GetWinScreen().SetActive(true);
+    private void ActivateLoseScreen() => _gameUILoading.GetFailScreen().SetActive(true);
 }

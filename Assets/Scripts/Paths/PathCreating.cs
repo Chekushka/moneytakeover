@@ -20,7 +20,6 @@ namespace Paths
                 {
                     var reverse = GetReversePath(start, end);
                     RemovePath(reverse);
-                    Destroy(reverse.gameObject);
                     FormPath(start, end, team, false);
                 }
                 else
@@ -28,8 +27,7 @@ namespace Paths
                     var enemyPath = GetReversePath(start, end);
                     
                     RemovePath(enemyPath);
-                    Destroy(enemyPath.gameObject);
-                    
+
                     FormPath(start, end, team, true);
                     FormPath(end, start, enemyPath.GetPathTeam(), true);
                 }
@@ -40,15 +38,14 @@ namespace Paths
 
         public void RemovePath(Path path)
         {
-            var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
-            createdPaths.Remove(pathToRemove);
+            //var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
+            createdPaths.Remove(path);
             path.GetStartBuilding().RemovePath(path);
         }
 
         public void CreateLineAfterBattle(Path removedPath)
         {
-            //var enemyPath = GetReversePath(removedPath.GetStartBuilding(), removedPath.GetEndBuilding());
-            var enemyPath = GetPathByPoints(removedPath.GetEndBuilding(), removedPath.GetStartBuilding());
+            var enemyPath = GetReversePath(removedPath.GetStartBuilding(), removedPath.GetEndBuilding());
             Debug.Log("path to remove:" + removedPath);
             Debug.Log("enemy: " + enemyPath);
             RemovePath(removedPath);
