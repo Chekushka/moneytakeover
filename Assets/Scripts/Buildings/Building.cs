@@ -24,6 +24,7 @@ namespace Buildings
         private BuildingUnitCount _unitCount;
         private PathCreating _pathCreating;
         private Vector3 _linePos;
+        private const int MaxUnitSpawnPower = 5;
         private const float LineYPos = 0.1f;
 
         private void Awake()
@@ -34,6 +35,8 @@ namespace Buildings
             _pathCreating = FindObjectOfType<PathCreating>();
             _linePos = transform.position;
             _linePos.y = LineYPos;
+            
+            InvokeRepeating(nameof(UpdateUnitSpawnPower), 1f, 0.5f);
         }
 
         public Team GetTeam() => team;
@@ -51,7 +54,7 @@ namespace Buildings
             _indicating.DecreasePathsCount();
             var pathToRemove = attachedPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             attachedPaths.Remove(pathToRemove);
-            Destroy(path.gameObject);
+            Destroy(pathToRemove.gameObject);
         }
 
         public void ChangeBuildingTeam(Team teamToChange)
@@ -61,7 +64,7 @@ namespace Buildings
                 if(attachedPaths[i].IsPathInBattle())
                     _pathCreating.CreateLineAfterBattle(attachedPaths[i]);
                 else
-                    RemovePath(attachedPaths[i]);
+                    _pathCreating.RemovePath(attachedPaths[i]);
             }
 
             if (teamToChange != TeamAssignment.GetInstance().GetPlayerTeam())
@@ -113,7 +116,8 @@ namespace Buildings
             var pathsEndThis = _pathCreating.GetPathsList().Where(x => x.GetEndBuilding().
                 gameObject.GetInstanceID() == gameObject.GetInstanceID() && x.GetPathTeam() == team).ToList();
 
-            unitSpawnPower = pathsEndThis.Count == 0 ? 0 : pathsEndThis.Count;
+            unitSpawnPower = _unitCount.IsMax() ? MaxUnitSpawnPower : pathsEndThis.Count;
+            unitSpawnPower = pathsEndThis.Count == 0 ? 0 : unitSpawnPower;
         }
     }
 

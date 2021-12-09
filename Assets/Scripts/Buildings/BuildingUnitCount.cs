@@ -11,7 +11,6 @@ namespace Buildings
     public class BuildingUnitCount : MonoBehaviour
     {
         [SerializeField] private int unitCount = 10;
-        [SerializeField] private int unitSpawnPowerOnMax = 4;
         [SerializeField] private TextMeshPro countText;
 
         private Building _building;
@@ -31,18 +30,13 @@ namespace Buildings
         private void Update()
         {
             if (unitCount < _maxUnitCount && unitCount >= 0)
-            {
                 countText.text = unitCount.ToString();
-                _building.UpdateUnitSpawnPower();
-            }
             if (unitCount >= _maxUnitCount)
-            {
                 countText.text = "MAX";
-                _building.unitSpawnPower = unitSpawnPowerOnMax;
-            }
         }
         
         public int GetUnitCount() => unitCount;
+        public bool IsMax() => unitCount >= _maxUnitCount;
         public void ResetUnitCount() => StartCoroutine(IncreaseUnitCount());
         
         private void OnTriggerEnter(Collider other)

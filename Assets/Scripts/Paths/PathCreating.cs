@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Buildings;
 using UnityEngine;
 
@@ -38,7 +37,6 @@ namespace Paths
 
         public void RemovePath(Path path)
         {
-            //var pathToRemove = createdPaths.Find(x => x.GetInstanceID() == path.GetInstanceID());
             createdPaths.Remove(path);
             path.GetStartBuilding().RemovePath(path);
         }
@@ -46,12 +44,19 @@ namespace Paths
         public void CreateLineAfterBattle(Path removedPath)
         {
             var enemyPath = GetReversePath(removedPath.GetStartBuilding(), removedPath.GetEndBuilding());
-            Debug.Log("path to remove:" + removedPath);
-            Debug.Log("enemy: " + enemyPath);
-            RemovePath(removedPath);
-            RemovePath(enemyPath);
-            
-            CreatePath(enemyPath.GetStartBuilding(), enemyPath.GetEndBuilding(), enemyPath.GetPathTeam());
+            if (enemyPath == null)
+            {
+                Debug.Log("enemy is null");
+            }
+            else
+            {
+                Debug.Log("path to remove:" + removedPath);
+                Debug.Log("enemy: " + enemyPath);
+                RemovePath(removedPath);
+                RemovePath(enemyPath);
+
+                CreatePath(enemyPath.GetStartBuilding(), enemyPath.GetEndBuilding(), enemyPath.GetPathTeam());
+            }
         }
 
         public List<Path> GetPathsList() => createdPaths;
@@ -59,7 +64,7 @@ namespace Paths
         public Path GetPathByPoints(Building start, Building end) =>
             createdPaths.Find(path => path.IfPathsEqual(start, end));
 
-        private Path GetReversePath(Building start, Building end) =>
+        private Path GetReversePath(Building start, Building end)=>
             createdPaths.Find(path => path.IfPathsReverse(start, end));
 
         private void FormPath(Building start, Building end, Team team, bool isBattlePath)

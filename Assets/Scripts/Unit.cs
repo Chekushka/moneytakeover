@@ -53,7 +53,8 @@ public class Unit : MonoBehaviour
    {
       var unit = other.gameObject.GetComponent<Unit>();
       if (other.gameObject.CompareTag(gameObject.tag) 
-          || _targetPos != unit.startBuilding.GetLinePos() && other.collider != null)
+          || _targetPos != unit.startBuilding.GetLinePos() && startBuilding.GetLinePos() != unit.GetTargetPos() && 
+          other.collider != null)
          Physics.IgnoreCollision(other.collider, _collider);
       else
       {

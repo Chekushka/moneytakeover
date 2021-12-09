@@ -533,11 +533,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1184361657 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3974920298095369565, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-  m_PrefabInstance: {fileID: 1664463081}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1360802344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6053527390842663806, guid: db6c8b875f172fd4cb6cbe47fb421c5a, type: 3}
@@ -616,11 +611,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9a95649928ca24598b539e7ba10354, type: 3}
---- !u!1 &1651295181 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 689576067270842485, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-  m_PrefabInstance: {fileID: 1664463081}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1664463081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,22 +618,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 689576067237354351, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 549.7695
-      objectReference: {fileID: 0}
-    - target: {fileID: 689576067237354351, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 835.5893
-      objectReference: {fileID: 0}
-    - target: {fileID: 689576067403994966, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 689576068926456092, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 851783034551215296, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -732,41 +706,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1457929668783737068, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: winText
-      value: 
-      objectReference: {fileID: 1651295181}
-    - target: {fileID: 1457929668783737068, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: failText
-      value: 
-      objectReference: {fileID: 1184361657}
-    - target: {fileID: 1457929668783737068, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: restartButton
-      value: 
-      objectReference: {fileID: 1664463082}
-    - target: {fileID: 3468212051788661274, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 3485511126475259849, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109919412198227558, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109919412198227558, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 736
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
---- !u!1 &1664463082 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3485511126475259849, guid: fa1464dc2c04c3640ad00b8f305cdabc, type: 3}
-  m_PrefabInstance: {fileID: 1664463081}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1939584802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1061,11 +1002,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9222475704133507945, guid: 99486c38c1b20a5438abcfc8d0a24378, type: 3}
       propertyPath: isDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9222475704133507945, guid: 99486c38c1b20a5438abcfc8d0a24378, type: 3}
       propertyPath: debugIndex
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9222475704133507946, guid: 99486c38c1b20a5438abcfc8d0a24378, type: 3}
       propertyPath: m_RootOrder

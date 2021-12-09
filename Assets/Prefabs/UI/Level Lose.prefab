@@ -71,8 +71,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 7.2767334, y: 1058}
-  m_SizeDelta: {x: 1242, y: 504.948}
+  m_AnchoredPosition: {x: -0.10241699, y: 1090.1285}
+  m_SizeDelta: {x: 1369.1763, y: 556.6528}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2311438001457758405
 CanvasRenderer:
@@ -104,7 +104,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b2c56d9b4ed779b48a6bd14bfb47f6ff, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -355,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 32, y: 762}
+  m_AnchoredPosition: {x: 32, y: 736}
   m_SizeDelta: {x: 596.806, y: 210.2525}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &97815308970741740
@@ -576,7 +576,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7133754292540923308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SceneTransitions, Assembly-CSharp
+        m_MethodName: RestartScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7133754292855588027
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,8 +623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 858}
-  m_SizeDelta: {x: 1242, y: 504.948}
+  m_AnchoredPosition: {x: 1, y: 755}
+  m_SizeDelta: {x: 1369.1763, y: 556.6528}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7133754292855588028
 CanvasRenderer:
@@ -644,7 +656,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: b2c56d9b4ed779b48a6bd14bfb47f6ff, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1

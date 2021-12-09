@@ -1,5 +1,6 @@
-using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Paths
 {
@@ -8,7 +9,15 @@ namespace Paths
         private PathCreating _pathCreating;
         private const int PathLayer = 10;
 
-        private void Start() => _pathCreating = FindObjectOfType<PathCreating>();
+        private void OnEnable()
+        {
+            _pathCreating = FindObjectOfType<PathCreating>();
+        }
+
+        private void OnDisable()
+        {
+            _pathCreating = null;
+        }
 
         private void OnCollisionEnter(Collision other)
         {
