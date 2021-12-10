@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class LastPlayedLevelSaving : MonoBehaviour
 {
-    private const string LastSceneIndexKey = "Last Scene Index";
-    private const string LastSceneNumberKey = "Last Scene Number";
+    private const string LastSceneIndexKey = "LastScene_Index";
+    private const string LastSceneNumberKey = "LastScene_Number";
     private const int DefaultSceneNumber = 1;
     
     private int _sceneNumber;

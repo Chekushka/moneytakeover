@@ -77,7 +77,7 @@ namespace Buildings
                         currentPlayer = TeamAssignment.GetInstance().GetEnemyByTeam(team);
                         currentPlayer.RemoveBuildingFromOwn(this); 
                     }
-
+                    
                     team = teamToChange;
                     _buildingTeam.ChangeTeamTo(teamToChange);
 

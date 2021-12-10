@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransitions : MonoBehaviour
 {
-    private const string LastSceneNumberKey = "Last Scene Number";
-    private const string LastSceneIndexKey = "Last Scene Index";
+    private const string LastSceneNumberKey = "LastScene_Number";
+    private const string LastSceneIndexKey = "LastScene_Index";
     private int _sceneNumber;
 
     public void RestartScene()

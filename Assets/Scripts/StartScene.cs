@@ -7,7 +7,7 @@ public class StartScene : MonoBehaviour
     [SerializeField] private bool isDebug;
     [SerializeField] private int debugIndex;
 
-    private const string SceneSaveKey = "Last Scene Index";
+    private const string SceneSaveKey = "LastScene_Index";
     private void Start() => SceneManager.LoadScene(GetSceneToLoadIndex());
 
     private int GetSceneToLoadIndex()
