@@ -9,7 +9,7 @@ public class StartScene : MonoBehaviour
 
     private const string SceneSaveKey = "LastScene_Index";
     private void Start() => SceneManager.LoadScene(GetSceneToLoadIndex());
-
+    
     private int GetSceneToLoadIndex()
     {
         int index;

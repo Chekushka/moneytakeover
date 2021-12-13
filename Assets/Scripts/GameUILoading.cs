@@ -26,4 +26,5 @@ public class GameUILoading : MonoBehaviour
         
         restartButton.SetActive(true);
     }
+    
 }
