@@ -8,12 +8,14 @@ using UnityEngine.SceneManagement;
 public class AppMetricaEventsInvocation : MonoBehaviour
 {
     private LastPlayedLevelSaving _levelSaving;
+    private IYandexAppMetrica _appMetrica;
     
     private const string StartLevelEventName = "level_start";
     private const string EndLevelEventName = "level_finish";
 
     private void OnEnable()
     {
+        _appMetrica = AppMetrica.Instance;
         SceneManager.sceneLoaded += OnLevelLoaded;
         BuildingsCounting.OnPlayerWin += OnLevelWin;
         BuildingsCounting.OnPlayerFail += OnLevelFail;
@@ -54,8 +56,8 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("result", isWin ? "win" : "lose");
         parameters.Add("time", Time.unscaledTime);
 
-        AppMetrica.Instance.ReportEvent(EndLevelEventName, parameters);
-        AppMetrica.Instance.SendEventsBuffer();
+        _appMetrica.ReportEvent(EndLevelEventName, parameters);
+        _appMetrica.SendEventsBuffer();
     }
 
     private void OnApplicationQuit()
@@ -72,8 +74,8 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("result", "leave");
         parameters.Add("time", Time.unscaledTime);
 
-        AppMetrica.Instance.ReportEvent(EndLevelEventName, parameters);
-        AppMetrica.Instance.SendEventsBuffer();
+        _appMetrica.ReportEvent(EndLevelEventName, parameters);
+        _appMetrica.SendEventsBuffer();
     }
 
     private IEnumerator WaitForLevelLoading()
@@ -91,7 +93,7 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("level_type", "normal");
         parameters.Add("game_mode", "classic");
         
-        AppMetrica.Instance.ReportEvent(StartLevelEventName, parameters);
-        AppMetrica.Instance.SendEventsBuffer();
+        _appMetrica.ReportEvent(StartLevelEventName, parameters);
+        _appMetrica.SendEventsBuffer();
     }
 }
