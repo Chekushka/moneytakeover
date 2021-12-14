@@ -52,6 +52,22 @@ android {
         }
         versionCode **VERSIONCODE**
         versionName '**VERSIONNAME**'
+		
+		tasks.whenTaskAdded { task ->
+        if (task.name.startsWith("bundle")) {
+            def renameTaskName = "rename${task.name.capitalize()}Aab"
+            def flavor = task.name.substring("bundle".length()).uncapitalize()
+            tasks.create(renameTaskName, Copy) {
+                def path = "${buildDir}/outputs/bundle/${flavor}/"
+                from(path)
+                include "gradleOut-release.aab"
+                destinationDir file("${buildDir}/outputs/bundle/${flavor}/")
+                rename "gradleOut-release.aab", "gradleOut.aab"
+				}
+
+				task.finalizedBy(renameTaskName)
+			}
+		}
     }
 
     aaptOptions {
