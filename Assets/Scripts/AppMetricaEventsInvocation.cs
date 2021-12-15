@@ -62,8 +62,6 @@ public class AppMetricaEventsInvocation : MonoBehaviour
 
         _appMetrica.ReportEvent(EndLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
-        foreach (var variableParameter in parameters)
-            Debug.Log(variableParameter);
     }
 
     private void OnApplicationQuit()
@@ -82,8 +80,6 @@ public class AppMetricaEventsInvocation : MonoBehaviour
 
         _appMetrica.ReportEvent(EndLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
-        foreach (var variableParameter in parameters)
-            Debug.Log(variableParameter);
     }
 
     private IEnumerator WaitForLevelLoading()
@@ -103,7 +99,5 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         
         _appMetrica.ReportEvent(StartLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
-        foreach (var variableParameter in parameters)
-            Debug.Log(variableParameter);
     }
 }

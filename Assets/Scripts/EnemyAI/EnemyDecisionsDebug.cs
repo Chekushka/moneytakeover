@@ -4,6 +4,7 @@ using System.Linq;
 using Buildings;
 using Paths;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace EnemyAI
 {
@@ -14,26 +15,19 @@ namespace EnemyAI
         [SerializeField] private float startDecisionTime = 5f;
         [SerializeField] private float minDecisionTime = 3f;
         [SerializeField] private float maxDecisionTime = 10f;
-        
+
         private PathCreating _pathCreating;
         private bool _isDefeated;
+
         private void Start()
         {
-            _pathCreating = FindObjectOfType<PathCreating>();   
+            _pathCreating = FindObjectOfType<PathCreating>();
             buildingsOnOwn = FindTeamBuildings();
             StartCoroutine(Decide(startDecisionTime));
         }
 
-        private void Update()
-        {
-            if (buildingsOnOwn == null)
-            {
-                _isDefeated = true;
-                Debug.Log("я пагіб");
-            }
-        }
-
         public void AddBuildingToOwn(Building building) => buildingsOnOwn.Add(building);
+
         public void RemoveBuildingFromOwn(Building building) => buildingsOnOwn.Remove(
             buildingsOnOwn.Find(x => x.GetInstanceID() == building.GetInstanceID()));
 
@@ -46,54 +40,79 @@ namespace EnemyAI
         private IEnumerator Decide(float decisionTime)
         {
             yield return new WaitForSeconds(decisionTime);
-            Debug.Log("я думаю");
+            Debug.Log(gameObject.name + ": " + "я думаю");
             var availableBuildings = buildingsOnOwn.Where(building =>
                 building.GetComponent<BuildingPathIndicating>().IsPathCreationAvailable()).ToList();
-            Debug.Log("знайшов доступні " + availableBuildings.Count);
+            Debug.Log(gameObject.name + ": " + "знайшов доступні " + availableBuildings.Count);
             if (availableBuildings.Count != 0)
             {
                 var startBuilding = availableBuildings[Random.Range(0, availableBuildings.Count)];
-                Debug.Log("додав початкову точку");
+                Debug.Log(gameObject.name + ": " + "додав початкову точку");
                 var availableBuildingToMove = startBuilding.GetAvailableBuildingsToPath();
-                Debug.Log("знайшов доступні для ходу");
+                Debug.Log(gameObject.name + ": " + "знайшов доступні для ходу");
                 var endBuilding = availableBuildingToMove[Random.Range(0, availableBuildingToMove.Count)];
-                Debug.Log("додав кінцеву точку");
-                
+                Debug.Log(gameObject.name + ": " + "додав кінцеву точку");
+
                 if (_pathCreating.GetPathByPoints(startBuilding, endBuilding) != null)
                 {
-                    Debug.Log("думаю чи видаляти");
-                    if (Random.Range(0, 4) == 4)
+                    Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
+                    if (Random.value >= 0.65)
                     {
-                        _pathCreating.RemovePath(_pathCreating.GetPathByPoints(startBuilding, endBuilding));
-                        Debug.Log("видалив");
+                        var path = _pathCreating.GetPathByPoints(startBuilding, endBuilding);
+
+                        if (path.IsPathInBattle())
+                            _pathCreating.CreateLineAfterBattle(path);
+                        else
+                            _pathCreating.RemovePath(path);
+                        Debug.Log(gameObject.name + ": " + "видалив");
                     }
                     else
-                        Debug.Log("передумав видаляти");
+                        Debug.Log(gameObject.name + ": " + "передумав видаляти");
                 }
                 else
                 {
                     _pathCreating.CreatePath(startBuilding, endBuilding, team);
-                    Debug.Log("я надумав додати");
+                    Debug.Log(gameObject.name + ": " + "я надумав додати");
                 }
             }
             else
             {
-                Debug.Log("німа доступних");
-                Debug.Log("думаю чи видаляти");
-                if (Random.Range(0, 2) == 2)
+                Debug.Log(gameObject.name + ": " + "німа доступних");
+                if (buildingsOnOwn.Count != 0)
                 {
-                    _pathCreating.RemovePath(buildingsOnOwn[Random.Range(0, 
-                        buildingsOnOwn.Count)].GetAttachedPaths()[Random.Range(0, buildingsOnOwn.Count)]);
-                    Debug.Log("видалив");
+                    Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
+                    if (Random.value >= 0.5)
+                    {
+                        var chosenBuilding = buildingsOnOwn[Random.Range(0,
+                            buildingsOnOwn.Count)];
+
+                        if (chosenBuilding.GetAttachedPaths().Count != 0)
+                        {
+                            var path =
+                                chosenBuilding.GetAttachedPaths()[
+                                    Random.Range(0, chosenBuilding.GetAttachedPaths().Count)];
+
+                            if (path.IsPathInBattle())
+                                _pathCreating.CreateLineAfterBattle(path);
+                            else
+                                _pathCreating.RemovePath(path);
+                            Debug.Log(gameObject.name + ": " + "видалив");
+                        }
+                        else
+                            Debug.Log(gameObject.name + ": " + "нема що видаляти в будинку, якому я думав видалити");
+                    }
+                    else
+                        Debug.Log(gameObject.name + ": " + "передумав видаляти");
                 }
                 else
-                    Debug.Log("передумав видаляти");
-                
+                {
+                    _isDefeated = true;
+                    Debug.Log(gameObject.name + ": " + "я пагіб");
+                }
             }
-            
+
             if (!_isDefeated)
                 StartCoroutine(Decide(Random.Range(minDecisionTime, maxDecisionTime)));
         }
-    
     }
 }
