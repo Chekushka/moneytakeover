@@ -32,6 +32,7 @@ public class AppMetricaEventsInvocation : MonoBehaviour
     {
         StartCoroutine(WaitForLevelLoading());
         SceneManager.sceneLoaded -= OnLevelLoaded;
+        
     }
 
     private void OnLevelWin()
@@ -84,7 +85,7 @@ public class AppMetricaEventsInvocation : MonoBehaviour
 
     private IEnumerator WaitForLevelLoading()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         _levelSaving = FindObjectOfType<LastPlayedLevelSaving>();
         
         var parameters = new Dictionary<string, object>();
@@ -99,5 +100,9 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         
         _appMetrica.ReportEvent(StartLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
+
+        SceneManager.sceneLoaded += OnLevelLoaded;
+        BuildingsCounting.OnPlayerWin += OnLevelWin;
+        BuildingsCounting.OnPlayerFail += OnLevelFail;
     }
 }
