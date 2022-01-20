@@ -10,7 +10,7 @@ namespace Buildings
         [SerializeField] private int maxBuildingsUnitCount = 65;
         public List<Building> buildings;
         private static BuildingsCounting _instance;
-        
+
         public delegate void PlayerFail();
         public static event PlayerFail OnPlayerFail;
         
@@ -39,10 +39,13 @@ namespace Buildings
         {
             var playerBuildings = buildings.Where(building => building.GetTeam() ==
                                                               TeamAssignment.GetInstance().GetPlayerTeam()).ToList();
-            if(playerBuildings.Count == 0)
+            if (playerBuildings.Count == 0)
                 OnPlayerFail?.Invoke();
-            if(playerBuildings.Count == buildings.Count)
+            if (playerBuildings.Count == buildings.Count)
                 OnPlayerWin?.Invoke();
+                
+
+            
         }
     }
 }
