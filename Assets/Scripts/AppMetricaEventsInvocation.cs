@@ -71,10 +71,10 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("level_type", "normal");
         parameters.Add("game_mode", "classic");
         parameters.Add("result", isWin ? "win" : "lose");
-        parameters.Add("time", Time.unscaledTime);
+        parameters.Add("time", Time.timeSinceLevelLoad);
         
-        //Debug.Log("Level finished:" + (isWin ? "win" : "lose"));
-        //parameters.ToList().ForEach(x => Debug.Log(x)); 
+        Debug.Log("Level finished:" + (isWin ? "win" : "lose"));
+        parameters.ToList().ForEach(x => Debug.Log(x)); 
         
         _appMetrica.ReportEvent(EndLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
@@ -92,10 +92,10 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("level_type", "normal");
         parameters.Add("game_mode", "classic");
         parameters.Add("result", "restart");
-        parameters.Add("time", Time.unscaledTime);
+        parameters.Add("time", Time.timeSinceLevelLoad);
         
-        //Debug.Log("Level Restarted");
-        //parameters.ToList().ForEach(x => Debug.Log(x)); 
+        Debug.Log("Level Restarted");
+        parameters.ToList().ForEach(x => Debug.Log(x)); 
 
         _appMetrica.ReportEvent(EndLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
@@ -113,7 +113,7 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("level_type", "normal");
         parameters.Add("game_mode", "classic");
         parameters.Add("result", "leave");
-        parameters.Add("time", Time.unscaledTime);
+        parameters.Add("time", Time.timeSinceLevelLoad);
 
         _appMetrica.ReportEvent(EndLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();
@@ -136,8 +136,8 @@ public class AppMetricaEventsInvocation : MonoBehaviour
         parameters.Add("level_type", "normal");
         parameters.Add("game_mode", "classic");
         
-        //Debug.Log("Level Started");
-        //parameters.ToList().ForEach(x => Debug.Log(x)); 
+        Debug.Log("Level Started");
+        parameters.ToList().ForEach(x => Debug.Log(x)); 
         
         _appMetrica.ReportEvent(StartLevelEventName, parameters);
         _appMetrica.SendEventsBuffer();

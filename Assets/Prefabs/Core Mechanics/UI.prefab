@@ -148,6 +148,8 @@ MonoBehaviour:
   failScreen: {fileID: 689576067403994966}
   failText: {fileID: 3974920298095369565}
   restartButton: {fileID: 3485511126475259849}
+  winContinueButton: {fileID: 689576067417604735}
+  failRestartButton: {fileID: 689576068067660853}
 --- !u!114 &261325298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +271,11 @@ GameObject:
 --- !u!224 &689576068926456093 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 163248819562671837, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
+  m_PrefabInstance: {fileID: 851783034917105600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &689576067417604735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 163248820266315199, guid: b63cde96656e3044d9f7210c45a096e7, type: 3}
   m_PrefabInstance: {fileID: 851783034917105600}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &689576067270842485 stripped
@@ -656,5 +663,10 @@ RectTransform:
 --- !u!1 &3974920298095369565 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6753203231631840450, guid: d1bafb1c2a5c9fe4a90a895b4be4465f, type: 3}
+  m_PrefabInstance: {fileID: 7679185455628765599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &689576068067660853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7133754292540923306, guid: d1bafb1c2a5c9fe4a90a895b4be4465f, type: 3}
   m_PrefabInstance: {fileID: 7679185455628765599}
   m_PrefabAsset: {fileID: 0}

@@ -43,9 +43,6 @@ namespace Buildings
                 OnPlayerFail?.Invoke();
             if (playerBuildings.Count == buildings.Count)
                 OnPlayerWin?.Invoke();
-                
-
-            
         }
     }
 }

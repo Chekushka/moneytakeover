@@ -9,7 +9,9 @@ public class GameUILoading : MonoBehaviour
     [SerializeField] private GameObject failScreen;
     [SerializeField] private GameObject failText;
     [SerializeField] private GameObject restartButton;
-
+    [SerializeField] private GameObject winContinueButton;
+    [SerializeField] private GameObject failRestartButton;
+    
     private void OnEnable() => SceneManager.sceneLoaded += OnLevelFinishedLoading;
     private void OnDisable() =>  SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 
@@ -20,9 +22,11 @@ public class GameUILoading : MonoBehaviour
     {
         winScreen.SetActive(false);
         winText.transform.localScale = Vector3.zero;
+        winContinueButton.transform.localScale = Vector3.zero;
         
         failScreen.SetActive(false);
         failText.transform.localScale = Vector3.zero;
+        failRestartButton.transform.localScale = Vector3.zero;
         
         restartButton.SetActive(true);
     }

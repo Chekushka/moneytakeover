@@ -40,22 +40,22 @@ namespace EnemyAI
         private IEnumerator Decide(float decisionTime)
         {
             yield return new WaitForSeconds(decisionTime);
-            Debug.Log(gameObject.name + ": " + "я думаю");
+            //Debug.Log(gameObject.name + ": " + "я думаю");
             var availableBuildings = buildingsOnOwn.Where(building =>
                 building.GetComponent<BuildingPathIndicating>().IsPathCreationAvailable()).ToList();
-            Debug.Log(gameObject.name + ": " + "знайшов доступні " + availableBuildings.Count);
+            //Debug.Log(gameObject.name + ": " + "знайшов доступні " + availableBuildings.Count);
             if (availableBuildings.Count != 0)
             {
                 var startBuilding = availableBuildings[Random.Range(0, availableBuildings.Count)];
-                Debug.Log(gameObject.name + ": " + "додав початкову точку");
+                //Debug.Log(gameObject.name + ": " + "додав початкову точку");
                 var availableBuildingToMove = startBuilding.GetAvailableBuildingsToPath();
-                Debug.Log(gameObject.name + ": " + "знайшов доступні для ходу");
+                //Debug.Log(gameObject.name + ": " + "знайшов доступні для ходу");
                 var endBuilding = availableBuildingToMove[Random.Range(0, availableBuildingToMove.Count)];
-                Debug.Log(gameObject.name + ": " + "додав кінцеву точку");
+                //Debug.Log(gameObject.name + ": " + "додав кінцеву точку");
 
                 if (_pathCreating.GetPathByPoints(startBuilding, endBuilding) != null)
                 {
-                    Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
+                    //Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
                     if (Random.value >= 0.65)
                     {
                         var path = _pathCreating.GetPathByPoints(startBuilding, endBuilding);
@@ -64,7 +64,7 @@ namespace EnemyAI
                             _pathCreating.CreateLineAfterBattle(path);
                         else
                             _pathCreating.RemovePath(path);
-                        Debug.Log(gameObject.name + ": " + "видалив");
+                        // Debug.Log(gameObject.name + ": " + "видалив");
                     }
                     else
                         Debug.Log(gameObject.name + ": " + "передумав видаляти");
@@ -72,15 +72,15 @@ namespace EnemyAI
                 else
                 {
                     _pathCreating.CreatePath(startBuilding, endBuilding, team);
-                    Debug.Log(gameObject.name + ": " + "я надумав додати");
+                    //Debug.Log(gameObject.name + ": " + "я надумав додати");
                 }
             }
             else
             {
-                Debug.Log(gameObject.name + ": " + "німа доступних");
+                //Debug.Log(gameObject.name + ": " + "німа доступних");
                 if (buildingsOnOwn.Count != 0)
                 {
-                    Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
+                    //Debug.Log(gameObject.name + ": " + "думаю чи видаляти");
                     if (Random.value >= 0.5)
                     {
                         var chosenBuilding = buildingsOnOwn[Random.Range(0,
@@ -107,7 +107,7 @@ namespace EnemyAI
                 else
                 {
                     _isDefeated = true;
-                    Debug.Log(gameObject.name + ": " + "я пагіб");
+                    // Debug.Log(gameObject.name + ": " + "я пагіб");
                 }
             }
 

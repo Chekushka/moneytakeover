@@ -50,8 +50,6 @@ namespace Paths
             }
             else
             {
-                Debug.Log("path to remove:" + removedPath);
-                Debug.Log("enemy: " + enemyPath);
                 RemovePath(removedPath);
                 RemovePath(enemyPath);
 

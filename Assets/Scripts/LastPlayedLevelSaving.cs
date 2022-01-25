@@ -1,3 +1,4 @@
+using System.Collections;
 using Buildings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class LastPlayedLevelSaving : MonoBehaviour
     private const int DefaultSceneNumber = 1;
     private const int DefaultPlaysCountNumber = 0;
     private const int DefaultLoopCount = 1;
+    private const int AfterLoopStartLevel = 2;
 
     private int _sceneIndex;
     private int _sceneNumber;
@@ -56,11 +58,18 @@ public class LastPlayedLevelSaving : MonoBehaviour
 
     private void OnLevelCompletedSave()
     {
+        BuildingsCounting.OnPlayerWin -= OnLevelCompletedSave;
+        StartCoroutine(WaitAndSave());
+    }
+
+    private IEnumerator WaitAndSave()
+    {
+        yield return new WaitForSeconds(0.3f);
         _sceneNumber++;
 
         if (_sceneIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
-            _sceneIndex = 2;
+            _sceneIndex = AfterLoopStartLevel;
             _loopCount++;
         }
         else
@@ -70,6 +79,5 @@ public class LastPlayedLevelSaving : MonoBehaviour
         PlayerPrefs.SetInt(LastSceneIndexKey, _sceneIndex);
         PlayerPrefs.SetInt(LastPlaysCountKey, _playsCount);
         PlayerPrefs.SetInt(LastLoopCountKey, _loopCount);
-        BuildingsCounting.OnPlayerWin -= OnLevelCompletedSave;
     }
 }
